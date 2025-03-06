@@ -199,7 +199,7 @@
       "url": "https://packages.unity.cn"
     },
     "com.unity.xr.picoxr": {
-      "version": "file:D:/PICO SDK",
+      "version": "file:E:/UNIVERSITY STUDY/IT/VR/PICO Unity Integration SDK_3.1.0_20250109",
       "depth": 0,
       "source": "local",
       "dependencies": {
