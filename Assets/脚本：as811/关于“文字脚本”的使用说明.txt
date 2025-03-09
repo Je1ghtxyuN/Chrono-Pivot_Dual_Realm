@@ -1,0 +1,6 @@
+TextPopup中预留了一块用于修改触发方式的段落，默认为接触到任何物体。
+有一个字体trigger的预制体作为基本触发。
+若想从零使用，参照如下步骤：
+1.为一个trigger挂载如下组件：TextPopup，Audiosource，可在TextPopup中修改它的文本，在AudioSource中修改它打出每个字符时发出的音效。
+2.为其创建子物体Text（TMP)，在Canvas中的RenderMode设定显示方式（基于物体/基于屏幕）
+3.随后分别在Canvas，Text（TMP）中修改字符框大小，在Text（TMP）中的Font Asset，FontSize分别修改字体和字符大小。
