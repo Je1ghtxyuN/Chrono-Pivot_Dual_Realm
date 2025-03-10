@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
+    path: Assets/Scenes/testscene.unity
+    guid: 46a4b771eb83cfd45986358977e06fde
+  - enabled: 1
     path: Assets/Scenes/forest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/testscene.unity
-    guid: 46a4b771eb83cfd45986358977e06fde
+    path: Assets/Scenes/01p.unity
+    guid: 4631681baf316f14985ced6f75c5f187
+  - enabled: 1
+    path: Assets/Scenes/forestPCversion.unity
+    guid: 769df26d8e59b314db6f9d30b48e39bd
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: e850f92f5e0b7ff44b72ea410b417736, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 942be401e1d1e834da8326eb5c9b4eac, type: 2}
