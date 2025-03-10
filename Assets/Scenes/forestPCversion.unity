@@ -633,7 +633,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.36845854, g: 0.3710634, b: 0.3773585, a: 1}
-  m_Intensity: 2.43
+  m_Intensity: 0.87
   m_Range: 4.28
   m_SpotAngle: 62
   m_InnerSpotAngle: 21.80208
@@ -1434,8 +1434,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1815481946}
   m_SourcePrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+--- !u!1 &1815481945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 3}
+  m_PrefabInstance: {fileID: 1815481944}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &1815481946
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815481945}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: d1fdb8e44b28da34d9e922cca0bc740e, type: 2}
 --- !u!1001 &2135976802
 PrefabInstance:
   m_ObjectHideFlags: 0
