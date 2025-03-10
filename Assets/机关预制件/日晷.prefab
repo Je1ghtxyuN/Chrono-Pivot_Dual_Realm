@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6570349324341934720}
   - component: {fileID: 5032931359579274420}
   - component: {fileID: 5222822465451303919}
+  - component: {fileID: 820051258706366155}
   m_Layer: 0
   m_Name: "\u65E5\u6677"
   m_TagString: Untagged
@@ -113,7 +114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 3
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0.13056247, g: 0.13812596, b: 0.16981131, a: 1}
   outlineWidth: 5
   precomputeOutline: 0
   bakeKeys: []
@@ -259,6 +260,27 @@ MonoBehaviour:
   player: {fileID: 3636729890109332178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
   interactionDistance: 2
   targetSceneName: 01
+--- !u!135 &820051258706366155
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3386275341579260000}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.004
+  m_Center: {x: 0.003, y: 0, z: 0}
 --- !u!1001 &3870683486626615680
 PrefabInstance:
   m_ObjectHideFlags: 0
