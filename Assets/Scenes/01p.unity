@@ -6850,6 +6850,18 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1646566795}
+    - target: {fileID: 6570349324341934720, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
+      propertyPath: outlineColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570349324341934720, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570349324341934720, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7186398929298597552, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
       propertyPath: m_LocalScale.x
       value: 300
@@ -8712,6 +8724,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4780568917014488282, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
+      propertyPath: xrOrigin
+      value: 
+      objectReference: {fileID: 2063614192}
     - target: {fileID: 4893261097468728610, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -10648,6 +10664,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5111133190211591532, guid: bdbadecacbaed8f4c8147fdf65c3529b, type: 3}
   m_PrefabInstance: {fileID: 2015733296}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2063614192 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4716636828360485119, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
+  m_PrefabInstance: {fileID: 1646566794}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2067467836
 PrefabInstance:
   m_ObjectHideFlags: 0
