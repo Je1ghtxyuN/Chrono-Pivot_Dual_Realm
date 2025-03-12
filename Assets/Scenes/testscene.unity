@@ -194,6 +194,18 @@ PrefabInstance:
       propertyPath: outlineWidth
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 6570349324341934720, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
+      propertyPath: outlineColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570349324341934720, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
+      propertyPath: outlineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570349324341934720, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
+      propertyPath: outlineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7186398929298597552, guid: e9faeb98cda811e4aa0c9c7ad1d511ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.194
@@ -802,10 +814,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3482461092950990178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_Name
       value: Player
@@ -973,7 +981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7173425530453605051, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: outlineColor.b
-      value: 0.116175175
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7173425530453605051, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: outlineColor.g
@@ -981,7 +989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7173425530453605051, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: outlineColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7525002298889440466, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: m_LocalPosition.x
