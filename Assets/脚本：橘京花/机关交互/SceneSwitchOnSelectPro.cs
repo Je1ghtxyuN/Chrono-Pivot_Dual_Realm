@@ -29,6 +29,12 @@ public class SceneSwitchOnSelect : MonoBehaviour
 
     void Update()
     {
+        // 检查设备是否有效，如果无效则重新初始化
+        if (!rightHandDevice.isValid)
+        {
+            InitializeRightHandDevice();
+        }
+
         // 检查射线是否射中物体
         CheckRayHit();
 
@@ -38,6 +44,7 @@ public class SceneSwitchOnSelect : MonoBehaviour
             // 检查射线是否射中物体，并且是否按下了右手柄的扳机键
             if (isRayHittingObject && IsRightTriggerPressed())
             {
+                Debug.Log("Trigger pressed and object hit. Switching scene...");
                 // 切换场景
                 SceneManager.LoadScene(targetSceneName);
             }
@@ -59,6 +66,11 @@ public class SceneSwitchOnSelect : MonoBehaviour
         if (devices.Count > 0)
         {
             rightHandDevice = devices[0];
+            Debug.Log("Right hand device initialized: " + rightHandDevice.name);
+        }
+        else
+        {
+            Debug.LogWarning("Right hand device not found!");
         }
     }
 
@@ -67,15 +79,11 @@ public class SceneSwitchOnSelect : MonoBehaviour
     {
         if (rightHandDevice.isValid)
         {
-            if (rightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue) && triggerValue)
+            if (rightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
             {
-                return true;
+                Debug.Log("Trigger Value: " + triggerValue);
+                return triggerValue;
             }
-        }
-        else
-        {
-            // 如果设备无效，尝试重新初始化
-            InitializeRightHandDevice();
         }
         return false;
     }
@@ -92,6 +100,7 @@ public class SceneSwitchOnSelect : MonoBehaviour
                 if (hit.transform == transform)
                 {
                     isRayHittingObject = true;
+                    Debug.Log("Ray hit object: " + hit.transform.name);
                     return;
                 }
             }
