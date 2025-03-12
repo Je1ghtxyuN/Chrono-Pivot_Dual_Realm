@@ -1,0 +1,6 @@
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Enterprise\Sample\VirtualDisplay\VirtualDisplayDemo.cs(11,20): warning CS0108: 'VirtualDisplayDemo.tag' hides inherited member 'Component.tag'. Use the new keyword if hiding was intended.
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Enterprise\Sample\VirtualDisplay\VirtualDisplayEvent.cs(18,19): warning CS0108: 'VirtualDisplayEvent.tag' hides inherited member 'Component.tag'. Use the new keyword if hiding was intended.
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Enterprise\Scripts\Plugin\PXR_EnterprisePlugin.cs(1651,17): warning CS0219: The variable 'sensorFrameIndex' is assigned but its value is never used
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Enterprise\Scripts\Plugin\PXR_EnterprisePlugin.cs(2260,22): warning CS0219: The variable 'value' is assigned but its value is never used
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Enterprise\Scripts\Plugin\PXR_EnterprisePlugin.cs(2304,20): warning CS0219: The variable 'value' is assigned but its value is never used
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Enterprise\Sample\VirtualDisplay\VirtualDisplayDemo.cs(14,18): warning CS0414: The field 'VirtualDisplayDemo.isBind' is assigned but its value is never used

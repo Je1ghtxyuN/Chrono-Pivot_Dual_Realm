@@ -1,0 +1,2 @@
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Platform\Samples\SimpleDemo.cs(30,66): warning CS0618: 'Message.GetError()' is obsolete: 'Use Error instead'
+E:\UNIVERSITY STUDY\IT\VR\PICO Unity Integration SDK_3.1.0_20250109\Platform\Samples\SimpleDemo.cs(30,94): warning CS0618: 'Message.GetError()' is obsolete: 'Use Error instead'
