@@ -1,27 +1,31 @@
 using UnityEngine;
-using UnityEngine.XR;
-using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using UnityEngine.XR;
 
-public class SceneSwitchOnSelect : MonoBehaviour
+public class SceneSwitchOnSelectPro : MonoBehaviour
 {
     public Transform player; // 玩家的位置（通常是 XR Origin 或 Camera）
-    public float interactionDistance = 2.0f; // 交互的最大距离
-    public string targetSceneName = "01"; // 要切换的目标场景名称
+    public string targetSceneName = "01n"; // 要切换的目标场景名称
 
-    private InputDevice rightHandDevice; // 右手柄设备
-    private InputDevice leftHandDevice;  // 左手柄设备
     private XRRayInteractor rightRayInteractor; // 右手柄射线组件
     private XRRayInteractor leftRayInteractor;  // 左手柄射线组件
-    private bool isRightRayHittingObject = false; // 右手射线是否射中物体
-    private bool isLeftRayHittingObject = false;  // 左手射线是否射中物体
+
+    private XRBaseInteractable interactable; // 当前物体的交互组件
+
+    private bool isSceneSwitchBlocked = false; // 是否禁止切换场景
+    private float sceneSwitchBlockTimer = 0f; // 禁止切换场景的计时器
+    private const float sceneSwitchBlockDuration = 2f; // 禁止切换场景的时间（2秒）
 
     void Start()
     {
-        // 初始化左右手柄设备
-        InitializeRightHandDevice();
-        InitializeLeftHandDevice();
+        // 获取当前物体的 XRBaseInteractable 组件
+        interactable = GetComponent<XRBaseInteractable>();
+        if (interactable == null)
+        {
+            Debug.LogError("XRBaseInteractable component not found on this object!");
+        }
 
         // 获取左右手柄的射线组件
         rightRayInteractor = GetRayInteractor(XRNode.RightHand);
@@ -35,140 +39,95 @@ public class SceneSwitchOnSelect : MonoBehaviour
         {
             Debug.LogError("Left XRRayInteractor not found in the scene!");
         }
+
+        // 订阅场景加载事件
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        // 取消订阅场景加载事件
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
     {
-        // 检查设备是否有效，如果无效则重新初始化
-        if (!rightHandDevice.isValid)
+        // 如果禁止切换场景，更新计时器
+        if (isSceneSwitchBlocked)
         {
-            InitializeRightHandDevice();
-        }
-        if (!leftHandDevice.isValid)
-        {
-            InitializeLeftHandDevice();
-        }
-
-        // 检查左右手柄的射线是否射中物体
-        CheckRayHit(XRNode.RightHand, ref isRightRayHittingObject);
-        CheckRayHit(XRNode.LeftHand, ref isLeftRayHittingObject);
-
-        // 检查玩家与物体的距离
-        if (IsPlayerNearObject(transform))
-        {
-            // 检查右手射线是否射中物体，并且是否按下了右手柄的扳机键
-            if (isRightRayHittingObject && IsRightTriggerPressed())
+            sceneSwitchBlockTimer -= Time.deltaTime;
+            if (sceneSwitchBlockTimer <= 0f)
             {
-                Debug.Log("Right trigger pressed and object hit. Switching scene...");
-                // 切换场景
-                SceneManager.LoadScene(targetSceneName);
-            }
-
-            // 检查左手射线是否射中物体，并且是否按下了左手柄的扳机键
-            if (isLeftRayHittingObject && IsLeftTriggerPressed())
-            {
-                Debug.Log("Left trigger pressed and object hit. Switching scene...");
-                // 切换场景
-                SceneManager.LoadScene(targetSceneName);
+                isSceneSwitchBlocked = false; // 计时器结束，允许切换场景
+                Debug.LogWarning("禁止切换场景已解除，可以再次切换场景。");
             }
         }
+
+        // 检查物体是否被高亮（即是否被射线选中）
+        bool isHighlighted = interactable.isHovered;
+
+        // 如果物体被高亮，输出调试信息
+        if (isHighlighted)
+        {
+            Debug.LogWarning("物体被高亮，射线选中。");
+        }
+
+        // 检查右手柄的扳机键是否按下
+        bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
+
+        // 如果右手柄扳机键按下，输出调试信息
+        if (isRightTriggerPressed)
+        {
+            Debug.LogWarning("右手柄扳机键按下。");
+        }
+
+        // 检查左手柄的扳机键是否按下
+        bool isLeftTriggerPressed = IsTriggerPressed(XRNode.LeftHand);
+
+        // 如果左手柄扳机键按下，输出调试信息
+        if (isLeftTriggerPressed)
+        {
+            Debug.LogWarning("左手柄扳机键按下。");
+        }
+
+        // 如果满足所有条件且未禁止切换场景，切换场景
+        if (isHighlighted && (isRightTriggerPressed || isLeftTriggerPressed) && !isSceneSwitchBlocked)
+        {
+            Debug.LogWarning("条件满足，正在切换场景...");
+
+            // 保存当前场景的状态
+            SceneStateManager.Instance.SaveCurrentSceneState();
+
+            // 加载新场景
+            SceneManager.LoadScene(targetSceneName);
+
+            // 切换场景后禁止再次切换场景
+            isSceneSwitchBlocked = true;
+            sceneSwitchBlockTimer = sceneSwitchBlockDuration;
+            Debug.LogWarning("切换场景成功，2 秒内禁止再次切换场景。");
+        }
     }
 
-    // 判断玩家是否在物体附近
-    private bool IsPlayerNearObject(Transform objectTransform)
+    // 场景加载后的回调
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        float distance = Vector3.Distance(player.position, objectTransform.position);
-        return distance <= interactionDistance;
+        // 恢复目标场景的状态
+        SceneStateManager.Instance.RestoreSceneState(scene.name);
     }
 
-    // 初始化右手柄设备
-    private void InitializeRightHandDevice()
+    // 检查手柄的扳机键是否按下
+    private bool IsTriggerPressed(XRNode handNode)
     {
         var devices = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(XRNode.RightHand, devices);
+        InputDevices.GetDevicesAtXRNode(handNode, devices);
         if (devices.Count > 0)
         {
-            rightHandDevice = devices[0];
-            Debug.Log("Right hand device initialized: " + rightHandDevice.name);
-        }
-        else
-        {
-            Debug.LogWarning("Right hand device not found!");
-        }
-    }
-
-    // 初始化左手柄设备
-    private void InitializeLeftHandDevice()
-    {
-        var devices = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(XRNode.LeftHand, devices);
-        if (devices.Count > 0)
-        {
-            leftHandDevice = devices[0];
-            Debug.Log("Left hand device initialized: " + leftHandDevice.name);
-        }
-        else
-        {
-            Debug.LogWarning("Left hand device not found!");
-        }
-    }
-
-    // 检查右手柄的扳机键是否按下
-    private bool IsRightTriggerPressed()
-    {
-        if (rightHandDevice.isValid)
-        {
-            if (rightHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
+            if (devices[0].TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
             {
-                Debug.Log("Right Trigger Value: " + triggerValue);
                 return triggerValue;
             }
         }
-        else
-        {
-            Debug.LogWarning("Right hand device is not valid!");
-        }
         return false;
-    }
-
-    // 检查左手柄的扳机键是否按下
-    private bool IsLeftTriggerPressed()
-    {
-        if (leftHandDevice.isValid)
-        {
-            if (leftHandDevice.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
-            {
-                Debug.Log("Left Trigger Value: " + triggerValue);
-                return triggerValue;
-            }
-        }
-        else
-        {
-            Debug.LogWarning("Left hand device is not valid!");
-        }
-        return false;
-    }
-
-    // 检查射线是否射中物体
-    private void CheckRayHit(XRNode handNode, ref bool isRayHittingObject)
-    {
-        XRRayInteractor rayInteractor = handNode == XRNode.RightHand ? rightRayInteractor : leftRayInteractor;
-
-        if (rayInteractor != null)
-        {
-            // 获取射线击中的物体
-            if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
-            {
-                // 检查击中的物体是否是当前物体
-                if (hit.transform == transform)
-                {
-                    isRayHittingObject = true;
-                    Debug.Log((handNode == XRNode.RightHand ? "Right" : "Left") + " ray hit object: " + hit.transform.name);
-                    return;
-                }
-            }
-        }
-        isRayHittingObject = false;
     }
 
     // 获取指定手柄的射线组件

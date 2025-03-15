@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ShuiLongTouInteractionSimplified : MonoBehaviour
 {
     public ParticleSystem particleEffect; // 用户自行添加的粒子效果
-    public float grabDistanceThreshold = 0.5f; // 抓握距离阈值
     public Animator animator; // 水龙头的动画控制器
 
     private bool isGrabbing = false;
     private bool isRotatingForward = false; // 是否正在正向旋转
-    private Transform handTransform;
+    private XRSimpleInteractable parentInteractable; // 父物体的交互组件
 
     private XRRayInteractor rayInteractor; // 射线组件
 
@@ -22,6 +22,13 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
         if (particleEffect != null)
         {
             particleEffect.Stop();
+        }
+
+        // 获取父物体的 XRSimpleInteractable 组件
+        parentInteractable = transform.parent?.GetComponent<XRSimpleInteractable>();
+        if (parentInteractable == null)
+        {
+            Debug.LogError("Parent XRSimpleInteractable component not found on this object!");
         }
 
         // 获取射线组件
@@ -40,22 +47,39 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
                 Debug.LogError("Animator not found on the object!");
             }
         }
+
+        // 订阅场景加载事件
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        // 取消订阅场景加载事件
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
     {
-        // 检查射线是否射中水龙头
-        CheckRayHit();
+        // 检查父物体是否被高亮（即是否被射线选中）
+        bool isParentHighlighted = parentInteractable != null && parentInteractable.isHovered;
 
-        // 持续检测左手柄的grip按键
+        // 如果父物体被高亮，输出调试信息
+        if (isParentHighlighted)
+        {
+            Debug.LogWarning("父物体被高亮，射线选中。");
+        }
+
+        // 持续检测左手柄的 grip 按键
         if (InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(CommonUsages.grip, out float leftGripValue) && leftGripValue > 0.5f)
         {
-            HandleGrab(XRNode.LeftHand);
+            Debug.LogWarning("左手柄抓握键按下。");
+            HandleGrab(isParentHighlighted);
         }
-        // 持续检测右手柄的grip按键
+        // 持续检测右手柄的 grip 按键
         else if (InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(CommonUsages.grip, out float rightGripValue) && rightGripValue > 0.5f)
         {
-            HandleGrab(XRNode.RightHand);
+            Debug.LogWarning("右手柄抓握键按下。");
+            HandleGrab(isParentHighlighted);
         }
         else
         {
@@ -63,56 +87,36 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
         }
     }
 
-    private void CheckRayHit()
+    private void HandleGrab(bool isParentHighlighted)
     {
-        if (rayInteractor != null)
+        if (!isGrabbing && isParentHighlighted)
         {
-            // 获取射线击中的物体
-            if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+            isGrabbing = true;
+
+            // 切换旋转方向
+            isRotatingForward = !isRotatingForward;
+
+            // 触发动画
+            if (isRotatingForward)
             {
-                // 检查击中的物体是否是当前物体
-                if (hit.transform == transform)
+                animator.SetTrigger("RotateForward");
+                if (particleEffect != null && !particleEffect.isPlaying)
                 {
-                    Debug.Log("Ray hit object: " + hit.transform.name);
+                    particleEffect.Play();
+                    Debug.LogWarning("粒子效果已开启。");
                 }
             }
-        }
-    }
-
-    private void HandleGrab(XRNode handNode)
-    {
-        if (!isGrabbing)
-        {
-            handTransform = GetHandTransform(handNode);
-            if (handTransform != null && Vector3.Distance(handTransform.position, transform.position) <= grabDistanceThreshold)
+            else
             {
-                isGrabbing = true;
-
-                // 切换旋转方向
-                isRotatingForward = !isRotatingForward;
-
-                // 触发动画
-                if (isRotatingForward)
+                animator.SetTrigger("RotateBackward");
+                if (particleEffect != null && particleEffect.isPlaying)
                 {
-                    animator.SetTrigger("RotateForward");
-                    if (particleEffect != null && !particleEffect.isPlaying)
-                    {
-                        particleEffect.Play();
-                        Debug.Log("Particle effect started.");
-                    }
+                    particleEffect.Stop();
+                    Debug.LogWarning("粒子效果已关闭。");
                 }
-                else
-                {
-                    animator.SetTrigger("RotateBackward");
-                    if (particleEffect != null && particleEffect.isPlaying)
-                    {
-                        particleEffect.Stop();
-                        Debug.Log("Particle effect stopped.");
-                    }
-                }
-
-                Debug.Log("Grab started. Rotating forward: " + isRotatingForward);
             }
+
+            Debug.LogWarning("抓握开始，旋转方向：" + (isRotatingForward ? "正向" : "反向"));
         }
     }
 
@@ -121,23 +125,13 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
         if (isGrabbing)
         {
             isGrabbing = false;
-            handTransform = null;
-
-            Debug.Log("Grab released.");
+            Debug.LogWarning("抓握结束。");
         }
     }
 
-    private Transform GetHandTransform(XRNode handNode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        InputDevice handDevice = InputDevices.GetDeviceAtXRNode(handNode);
-        if (handDevice.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position) &&
-            handDevice.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation))
-        {
-            GameObject hand = new GameObject("Hand");
-            hand.transform.position = position;
-            hand.transform.rotation = rotation;
-            return hand.transform;
-        }
-        return null;
+        // 恢复场景状态
+        SceneStateManager.Instance.RestoreSceneState(scene.name);
     }
 }
