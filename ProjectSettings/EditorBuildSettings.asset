@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/forest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Scenes/01-antient.unity
+    path: Assets/Scenes/01.unity
     guid: 4631681baf316f14985ced6f75c5f187
   - enabled: 0
     path: Assets/Scenes/forestPCversion.unity
