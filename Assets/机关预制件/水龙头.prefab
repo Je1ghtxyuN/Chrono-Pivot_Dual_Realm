@@ -126,7 +126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particleEffect: {fileID: 5724846863120158152}
-  grabDistanceThreshold: 0.5
   animator: {fileID: 0}
 --- !u!95 &2175278895849170713
 Animator:
@@ -444,7 +443,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1
