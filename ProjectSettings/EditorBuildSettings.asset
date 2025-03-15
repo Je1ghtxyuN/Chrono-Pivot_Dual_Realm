@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/forest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/01-antient.unity
     guid: 4631681baf316f14985ced6f75c5f187
   - enabled: 0
     path: Assets/Scenes/forestPCversion.unity
     guid: 769df26d8e59b314db6f9d30b48e39bd
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/01-present.unity
     guid: f54540dc22b08be439ffbe3ee336d826
   m_configObjects:

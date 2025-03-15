@@ -18,6 +18,7 @@ public class SINANcontroller: MonoBehaviour
             isTriggered = true;
             initialPosition = spoon.position;
             initialRotation = spoon.rotation;
+            Debug.Log("SINANcontroller: OnTriggerEnter");
         }
     }
 

@@ -7,7 +7,7 @@ public class ParticleController : MonoBehaviour
     public float duration = 5f; // 持续时间
     public GameObject particleOrigin;
     public ParticleSystem targetParticle;
-
+    
     void Start()
     {
         if (targetParticle != null)
