@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -46,6 +47,15 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
                 Debug.LogError("Animator not found on the object!");
             }
         }
+
+        // 订阅场景加载事件
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        // 取消订阅场景加载事件
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     void Update()
@@ -117,5 +127,11 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
             isGrabbing = false;
             Debug.LogWarning("抓握结束。");
         }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // 恢复场景状态
+        SceneStateManager.Instance.RestoreSceneState(scene.name);
     }
 }

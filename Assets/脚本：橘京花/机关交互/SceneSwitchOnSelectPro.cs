@@ -113,13 +113,6 @@ public class SceneSwitchOnSelectPro : MonoBehaviour
     {
         // 恢复目标场景的状态
         SceneStateManager.Instance.RestoreSceneState(scene.name);
-
-        // 手动恢复玩家对象的状态
-        GameObject player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            SceneStateManager.Instance.RestorePlayerState(player);
-        }
     }
 
     // 检查手柄的扳机键是否按下
