@@ -4,95 +4,153 @@ using UnityEngine.SceneManagement;
 
 public class SceneStateManager : MonoBehaviour
 {
-    public static SceneStateManager Instance;
+    public static SceneStateManager Instance { get; private set; }
 
-    private Dictionary<string, SceneState> sceneStates = new Dictionary<string, SceneState>();
+    private Dictionary<string, Dictionary<string, ObjectState>> sceneStates = new Dictionary<string, Dictionary<string, ObjectState>>();
+    private Dictionary<string, PlayerState> playerStates = new Dictionary<string, PlayerState>(); // 保存玩家状态
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // 确保不被销毁
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // 如果已经存在实例，销毁新的实例
+            Destroy(gameObject);
         }
     }
 
-    // 保存当前场景的状态
     public void SaveCurrentSceneState()
     {
         string sceneName = SceneManager.GetActiveScene().name;
-        Debug.Log($"Saving state for scene: {sceneName}");
-        SceneState sceneState = new SceneState { sceneName = sceneName };
+        Dictionary<string, ObjectState> objectStates = new Dictionary<string, ObjectState>();
 
-        // 递归保存所有对象
-        SaveObjectStateRecursive(sceneState, GameObject.Find("RootObject")); // 从根对象开始
-        sceneStates[sceneName] = sceneState;
-    }
-
-    private void SaveObjectStateRecursive(SceneState sceneState, GameObject obj)
-    {
-        if (obj == null) return;
-
-        // 保存当前对象的状态
-        sceneState.SaveObjectState(obj);
-
-        // 递归保存所有子对象
-        foreach (Transform child in obj.transform)
+        // 保存场景中所有物体的状态
+        foreach (GameObject obj in FindObjectsOfType<GameObject>())
         {
-            SaveObjectStateRecursive(sceneState, child.gameObject);
+            if (obj.activeInHierarchy)
+            {
+                ObjectState state = new ObjectState
+                {
+                    position = obj.transform.position,
+                    rotation = obj.transform.rotation,
+                    scale = obj.transform.localScale,
+                    isActive = obj.activeSelf
+                };
+
+                // 保存动画状态
+                Animator animator = obj.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    state.animatorState = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+                    state.animatorTrigger = animator.GetBool("RotateForward");
+                }
+
+                // 保存粒子状态
+                ParticleSystem particleSystem = obj.GetComponent<ParticleSystem>();
+                if (particleSystem != null)
+                {
+                    state.isParticlePlaying = particleSystem.isPlaying;
+                }
+
+                objectStates[obj.name] = state;
+            }
+        }
+
+        sceneStates[sceneName] = objectStates;
+
+        // 保存玩家状态
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            PlayerState playerState = new PlayerState
+            {
+                position = player.transform.position,
+                rotation = player.transform.rotation,
+                scale = player.transform.localScale,
+                isActive = player.activeSelf
+            };
+
+            playerStates[sceneName] = playerState;
+            Debug.LogWarning("玩家状态已保存：" + playerState.position);
         }
     }
 
-    // 恢复指定场景的状态
     public void RestoreSceneState(string sceneName)
     {
         if (sceneStates.ContainsKey(sceneName))
         {
-            Debug.Log($"Restoring state for scene: {sceneName}");
-            SceneState sceneState = sceneStates[sceneName];
-
-            // 递归恢复所有对象
-            RestoreObjectStateRecursive(sceneState, GameObject.Find("RootObject")); // 从根对象开始
-        }
-        else
-        {
-            Debug.LogWarning($"No saved state found for scene: {sceneName}");
-        }
-    }
-
-    private void RestoreObjectStateRecursive(SceneState sceneState, GameObject obj)
-    {
-        if (obj == null) return;
-
-        // 恢复当前对象的状态
-        sceneState.RestoreObjectState(obj);
-
-        // 递归恢复所有子对象
-        foreach (Transform child in obj.transform)
-        {
-            RestoreObjectStateRecursive(sceneState, child.gameObject);
-        }
-    }
-
-    // 手动恢复玩家对象的状态
-    public void RestorePlayerState(GameObject player)
-    {
-        string key = player.name + "_" + player.GetInstanceID();
-        if (sceneStates.ContainsKey(SceneManager.GetActiveScene().name))
-        {
-            SceneState sceneState = sceneStates[SceneManager.GetActiveScene().name];
-            if (sceneState.objectStates.ContainsKey(key))
+            Dictionary<string, ObjectState> objectStates = sceneStates[sceneName];
+            foreach (GameObject obj in FindObjectsOfType<GameObject>())
             {
-                ObjectState state = sceneState.objectStates[key];
-                player.transform.position = state.position;
-                player.transform.rotation = state.rotation;
-                player.transform.localScale = state.scale;
-                player.SetActive(state.isActive);
+                if (objectStates.ContainsKey(obj.name))
+                {
+                    ObjectState state = objectStates[obj.name];
+                    obj.transform.position = state.position;
+                    obj.transform.rotation = state.rotation;
+                    obj.transform.localScale = state.scale;
+                    obj.SetActive(state.isActive);
+
+                    // 恢复动画状态
+                    Animator animator = obj.GetComponent<Animator>();
+                    if (animator != null)
+                    {
+                        animator.Play(state.animatorState);
+                        animator.SetBool("RotateForward", state.animatorTrigger);
+                    }
+
+                    // 恢复粒子状态
+                    ParticleSystem particleSystem = obj.GetComponent<ParticleSystem>();
+                    if (particleSystem != null)
+                    {
+                        if (state.isParticlePlaying)
+                        {
+                            particleSystem.Play();
+                        }
+                        else
+                        {
+                            particleSystem.Stop();
+                        }
+                    }
+                }
             }
         }
+
+        // 恢复玩家状态
+        if (playerStates.ContainsKey(sceneName))
+        {
+            PlayerState playerState = playerStates[sceneName];
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = playerState.position;
+                player.transform.rotation = playerState.rotation;
+                player.transform.localScale = playerState.scale;
+                player.SetActive(playerState.isActive);
+                Debug.LogWarning("玩家状态已恢复：" + playerState.position);
+            }
+        }
+    }
+
+    private class ObjectState
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public Vector3 scale;
+        public bool isActive;
+
+        public int animatorState; // 动画状态
+        public bool animatorTrigger; // 动画触发器状态
+        public bool isParticlePlaying; // 粒子播放状态
+    }
+
+    private class PlayerState
+    {
+        public Vector3 position;
+        public Quaternion rotation;
+        public Vector3 scale;
+        public bool isActive;
     }
 }
