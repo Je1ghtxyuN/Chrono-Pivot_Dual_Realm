@@ -1063,10 +1063,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8283811269643718822, guid: 1f1b32f90e992de41b66c80107439f3f, type: 3}
-      propertyPath: m_Name
-      value: "\u5B57\u4F53trigger"
-      objectReference: {fileID: 0}
     - target: {fileID: 3510236261709123058, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1174,6 +1170,10 @@ PrefabInstance:
     - target: {fileID: 8054099848000471553, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8283811269643718822, guid: 1f1b32f90e992de41b66c80107439f3f, type: 3}
+      propertyPath: m_Name
+      value: "\u5B57\u4F53trigger"
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3510236261709123058, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
