@@ -16,8 +16,6 @@ public class ContinuousRotator : MonoBehaviour
 
     void Start()
     {
-
-
         // 自动归一化旋转轴
         rotationAxis = rotationAxis.normalized;
     }

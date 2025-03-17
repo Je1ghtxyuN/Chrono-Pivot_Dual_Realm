@@ -2278,7 +2278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b6ef4569ba10dd448a9be3428187c4d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.46
+      value: 0.06
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 3b6ef4569ba10dd448a9be3428187c4d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6144,7 +6144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationAxis: {x: 0, y: 0, z: -1}
-  degreesPerSecond: 15
+  degreesPerSecond: 180
   useLocalSpace: 0
 --- !u!4 &2008099020
 Transform:
