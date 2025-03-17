@@ -1,22 +1,21 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine.XR;
 
 public class SceneSwitchOnSelectPro : MonoBehaviour
 {
     public Transform player; // 玩家的位置（通常是 XR Origin 或 Camera）
-    public string targetSceneName = "01n"; // 要切换的目标场景名称
+    public TimetravelController timetravelController; // 直接拖入 TimetravelController
 
     private XRRayInteractor rightRayInteractor; // 右手柄射线组件
     private XRRayInteractor leftRayInteractor;  // 左手柄射线组件
 
     private XRBaseInteractable interactable; // 当前物体的交互组件
 
-    private bool isSceneSwitchBlocked = false; // 是否禁止切换场景
-    private float sceneSwitchBlockTimer = 0f; // 禁止切换场景的计时器
-    private const float sceneSwitchBlockDuration = 2f; // 禁止切换场景的时间（2秒）
+    private bool isPositionSwitchBlocked = false; // 是否禁止切换位置
+    private float positionSwitchBlockTimer = 0f; // 禁止切换位置的计时器
+    private const float positionSwitchBlockDuration = 2f; // 禁止切换位置的时间（2秒）
 
     void Start()
     {
@@ -40,26 +39,23 @@ public class SceneSwitchOnSelectPro : MonoBehaviour
             Debug.LogError("Left XRRayInteractor not found in the scene!");
         }
 
-        // 订阅场景加载事件
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnDestroy()
-    {
-        // 取消订阅场景加载事件
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        // 检查 TimetravelController 是否已赋值
+        if (timetravelController == null)
+        {
+            Debug.LogError("TimetravelController is not assigned! Please drag and drop the TimetravelController component.");
+        }
     }
 
     void Update()
     {
-        // 如果禁止切换场景，更新计时器
-        if (isSceneSwitchBlocked)
+        // 如果禁止切换位置，更新计时器
+        if (isPositionSwitchBlocked)
         {
-            sceneSwitchBlockTimer -= Time.deltaTime;
-            if (sceneSwitchBlockTimer <= 0f)
+            positionSwitchBlockTimer -= Time.deltaTime;
+            if (positionSwitchBlockTimer <= 0f)
             {
-                isSceneSwitchBlocked = false; // 计时器结束，允许切换场景
-                Debug.LogWarning("禁止切换场景已解除，可以再次切换场景。");
+                isPositionSwitchBlocked = false; // 计时器结束，允许切换位置
+                Debug.LogWarning("禁止切换位置已解除，可以再次切换位置。");
             }
         }
 
@@ -90,29 +86,19 @@ public class SceneSwitchOnSelectPro : MonoBehaviour
             Debug.LogWarning("左手柄扳机键按下。");
         }
 
-        // 如果满足所有条件且未禁止切换场景，切换场景
-        if (isHighlighted && (isRightTriggerPressed || isLeftTriggerPressed) && !isSceneSwitchBlocked)
+        // 如果满足所有条件且未禁止切换位置，调用 Timetravel 方法
+        if (isHighlighted && (isRightTriggerPressed || isLeftTriggerPressed) && !isPositionSwitchBlocked)
         {
-            Debug.LogWarning("条件满足，正在切换场景...");
+            Debug.LogWarning("条件满足，正在切换玩家位置...");
 
-            // 保存当前场景的状态
-            SceneStateManager.Instance.SaveCurrentSceneState();
+            // 调用 Timetravel 方法
+            timetravelController.Timetravel();
 
-            // 加载新场景
-            SceneManager.LoadScene(targetSceneName);
-
-            // 切换场景后禁止再次切换场景
-            isSceneSwitchBlocked = true;
-            sceneSwitchBlockTimer = sceneSwitchBlockDuration;
-            Debug.LogWarning("切换场景成功，2 秒内禁止再次切换场景。");
+            // 切换位置后禁止再次切换位置
+            isPositionSwitchBlocked = true;
+            positionSwitchBlockTimer = positionSwitchBlockDuration;
+            Debug.LogWarning("切换位置成功，2 秒内禁止再次切换位置。");
         }
-    }
-
-    // 场景加载后的回调
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        // 恢复目标场景的状态
-        SceneStateManager.Instance.RestoreSceneState(scene.name);
     }
 
     // 检查手柄的扳机键是否按下
