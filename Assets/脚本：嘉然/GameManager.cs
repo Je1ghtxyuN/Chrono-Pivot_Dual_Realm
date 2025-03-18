@@ -1,22 +1,12 @@
-// GameManager.cs
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static bool pour = false; // 全局控制变量
 
-    public bool WaterPoured { get; set; }
-
-    void Awake()
+    // 切换状态的方法
+    public static void TogglePourState()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 跨场景持久化
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        pour = !pour;
     }
 }
