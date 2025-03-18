@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class TextPopup : MonoBehaviour
 {
     [Header("文字内容")]
@@ -15,26 +14,34 @@ public class TextPopup : MonoBehaviour
     public float displayDuration = 3f; // 显示总时长
 
     public TMP_Text uiText;
+    public Transform playerTransform; // 玩家的Transform
+
     private Coroutine displayCoroutine;
-    
 
     void Start()
     {
         uiText.gameObject.SetActive(false);
     }
 
-    //触发方式，待定
-    void OnTriggerEnter(Collider other) 
+    void Update()
+    {
+        // 使文本始终面向玩家
+        if (uiText.gameObject.activeSelf)
+        {
+            uiText.transform.LookAt(playerTransform);
+            uiText.transform.rotation = Quaternion.LookRotation(uiText.transform.position - playerTransform.position);
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
     {
         //if(other.CompareTag("Player"))
-        if (true)////待定
+        if (true) // 待定
         {
             StartDisplay();
             Debug.Log("Player entered the trigger");
         }
     }
-
-   
 
     void StartDisplay()
     {
@@ -52,7 +59,7 @@ public class TextPopup : MonoBehaviour
         {
             uiText.text += c;
             yield return new WaitForSeconds(charDelay);
-            GetComponent<AudioSource>().Play(); 
+            GetComponent<AudioSource>().Play();
         }
 
         // 保持显示displayDuration秒

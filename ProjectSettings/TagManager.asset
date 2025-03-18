@@ -13,6 +13,7 @@ TagManager:
   - grass
   - rock
   - wood
+  - Grabbable
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Teleport
   - 
   - 
   - 
