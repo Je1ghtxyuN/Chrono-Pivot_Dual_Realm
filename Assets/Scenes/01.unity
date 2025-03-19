@@ -8613,7 +8613,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.5, y: 5, z: 6.5}
   m_Center: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &780333583
 GameObject:
   m_ObjectHideFlags: 0
@@ -8708,8 +8707,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &791431049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10109,11 +10106,6 @@ Transform:
   - {fileID: 1210837379}
   - {fileID: 486573682}
   - {fileID: 1923293085}
-<<<<<<< HEAD
-=======
-  - {fileID: 1958645751}
-  - {fileID: 825002578}
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
   - {fileID: 1897126899}
   - {fileID: 548718073}
   m_Father: {fileID: 1297582655}
@@ -10246,7 +10238,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1313987855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1 &915463066
 GameObject:
   m_ObjectHideFlags: 0
@@ -10341,8 +10332,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &942511815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10779,15 +10768,12 @@ Transform:
   - {fileID: 1708423180}
   - {fileID: 566631628}
   - {fileID: 867426448}
-<<<<<<< HEAD
   - {fileID: 1304227114}
   - {fileID: 1231895665}
   - {fileID: 2040373326}
   - {fileID: 1228079586}
   - {fileID: 1450853882}
   - {fileID: 1383760552}
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
   m_Father: {fileID: 1056270263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1003153931
@@ -12969,7 +12955,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1927385280657385532, guid: 5c7e017c2e16c7e44b7c94d5abc02140, type: 3}
   m_PrefabInstance: {fileID: 1175408759}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1 &1178802066
 GameObject:
   m_ObjectHideFlags: 0
@@ -13064,8 +13049,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &1192434014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15162,7 +15145,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1056270263}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< HEAD
 --- !u!1001 &1304227113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15237,8 +15219,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d61e60803f3ecf248b31dfb9d365d224, type: 3}
   m_PrefabInstance: {fileID: 1304227113}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &1311095347
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16349,7 +16329,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 973535244642853529, guid: 7cbd48df391fd7641a65e617034c305b, type: 3}
   m_PrefabInstance: {fileID: 1376804179}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
 --- !u!1001 &1383760551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16424,8 +16403,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5fd3342c0ea9ef8419fd55a67e80fcae, type: 3}
   m_PrefabInstance: {fileID: 1383760551}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &1390475041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17223,7 +17200,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1679068845}
   m_LocalEulerAnglesHint: {x: 13.5, y: -178.86, z: 0}
-<<<<<<< HEAD
 --- !u!1001 &1450853881
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17329,8 +17305,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c2a158a6dbb53c54dbb63fe76f74bdab, type: 3}
   m_PrefabInstance: {fileID: 1450853881}
   m_PrefabAsset: {fileID: 0}
-=======
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &1454641940
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23322,75 +23296,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 582797275798389954, guid: 4daf5f60b3d3ef942be6a0f753ffc1ba, type: 3}
   m_PrefabInstance: {fileID: 1954580113}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< HEAD
-=======
---- !u!1001 &1958645750
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 900277657}
-    m_Modifications:
-    - target: {fileID: 2546920872070288512, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_Name
-      value: SM_building_residental_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 2546920872070288512, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_TagString
-      value: concrete
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 70.49259
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -6.1858625
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 34.332676
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.6670363
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.7450253
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -96.323
-      objectReference: {fileID: 0}
-    - target: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
---- !u!4 &1958645751 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2887840512851004986, guid: 32b08c66cdd57274693a5f57dd08c7b7, type: 3}
-  m_PrefabInstance: {fileID: 1958645750}
-  m_PrefabAsset: {fileID: 0}
->>>>>>> parent of b4116aa6 (场景修改（重新上传版）)
 --- !u!1001 &1962768751
 PrefabInstance:
   m_ObjectHideFlags: 0
