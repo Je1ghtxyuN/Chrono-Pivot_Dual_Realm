@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/forest.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/StartMenu.unity
     guid: 900b9cc8ac471884cb0039ea4253578e
   - enabled: 1
@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/01-present.unity
     guid: f54540dc22b08be439ffbe3ee336d826
+  - enabled: 0
+    path: "Assets/Scenes/\u4E2A\u4EBA\u5907\u4EFD\u573A\u666F/01-lyf.unity"
+    guid: 0cf559baf2db36842a4158c0da2eabf3
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: e850f92f5e0b7ff44b72ea410b417736, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c348712bda248c246b8c49b3db54643f, type: 3}

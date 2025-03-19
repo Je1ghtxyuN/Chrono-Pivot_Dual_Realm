@@ -17,6 +17,8 @@ public class TimetravelController : MonoBehaviour
     public Transform nowPosition;  // 记录现在的位置
     public Transform startPosition; // 游戏开始时的出生点位置
 
+    public PICOLeftJoystickMovement movementController;
+
     [Header("时间插值")]
     public float up = 500f;
 
@@ -41,8 +43,12 @@ public class TimetravelController : MonoBehaviour
         }
     }
 
-    public void Timetravel()
+    private IEnumerator TimetravelWithDelay()
     {
+        Debug.Log("加载中...");
+        yield return new WaitForSeconds(0); 
+
+        // 执行时间旅行逻辑
         if (time == false)
         {
             IntoPast();
@@ -54,6 +60,12 @@ public class TimetravelController : MonoBehaviour
 
         // 切换时间状态
         time = !time;
+    }
+
+
+    public void Timetravel()
+    {
+        StartCoroutine(TimetravelWithDelay()); 
     }
 
     private void IntoPast()
@@ -68,6 +80,25 @@ public class TimetravelController : MonoBehaviour
         RenderSettings.skybox = pastSkyBox; // 直接赋值，不使用 Instantiate
         past.SetActive(true);
         now.SetActive(false);
+
+        if (movementController != null)
+        {
+            movementController.enabled = false; // 禁用移动逻辑
+        }
+
+        if (pastPosition != null)
+        {
+            player.transform.position = pastPosition.position;
+        }
+
+        RenderSettings.skybox = pastSkyBox;
+        past.SetActive(true);
+        now.SetActive(false);
+
+        if (movementController != null)
+        {
+            movementController.enabled = true; // 启用移动逻辑
+        }
     }
 
     private void IntoNow()
@@ -82,5 +113,24 @@ public class TimetravelController : MonoBehaviour
         RenderSettings.skybox = nowSkyBox; // 直接赋值，不使用 Instantiate
         now.SetActive(true);
         past.SetActive(false);
+
+        if (movementController != null)
+        {
+            movementController.enabled = false; // 禁用移动逻辑
+        }
+
+        if (nowPosition != null)
+        {
+            player.transform.position = nowPosition.position;
+        }
+
+        RenderSettings.skybox = nowSkyBox;
+        now.SetActive(true);
+        past.SetActive(false);
+
+        if (movementController != null)
+        {
+            movementController.enabled = true; // 启用移动逻辑
+        }
     }
 }
