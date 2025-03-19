@@ -5,15 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Camera0
-  - "\u6C34\u9F99\u5934"
-  - Fire
-  - "\u7BAD"
-  - water
-  - concrete
-  - grass
-  - rock
-  - wood
-  - Grabbable
   layers:
   - Default
   - TransparentFX
@@ -23,7 +14,7 @@ TagManager:
   - UI
   - 
   - 
-  - Teleport
+  - 
   - 
   - 
   - 
