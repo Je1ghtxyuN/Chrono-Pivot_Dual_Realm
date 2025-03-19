@@ -1,5 +1,6 @@
 fileFormatVersion: 2
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:Assets/机关预制件/拼好箭.prefab.meta
 guid: 36b608285088be248ae5a961fd1e7f9e
 ========
@@ -11,6 +12,9 @@ guid: 8d715647ee6e4c444b4a9a0e2449dddf
 ========
 guid: 18f679e5baa855142b72339635700967
 >>>>>>>> Stashed changes:Assets/机关预制件/拼好箭.prefab.meta
+>>>>>>> Stashed changes
+=======
+guid: 18f679e5baa855142b72339635700967
 >>>>>>> Stashed changes
 PrefabImporter:
   externalObjects: {}
