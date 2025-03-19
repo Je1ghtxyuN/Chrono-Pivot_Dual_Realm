@@ -6,15 +6,16 @@ public class TimetravelController : MonoBehaviour
 {
     public GameObject player;
     [Header("过去和现在")]
-    public GameObject past;
-    public Material pastSkyBox;
+    public GameObject past; // 过去场景
+    public Material pastSkyBox; // 过去的天空盒
 
-    public GameObject now;
-    public Material nowSkyBox;
+    public GameObject now; // 现在场景
+    public Material nowSkyBox; // 现在的天空盒
 
     [Header("传送位置")]
     public Transform pastPosition; // 记录过去的位置
     public Transform nowPosition;  // 记录现在的位置
+    public Transform startPosition; // 游戏开始时的出生点位置
 
     [Header("时间插值")]
     public float up = 500f;
@@ -24,12 +25,18 @@ public class TimetravelController : MonoBehaviour
 
     private void Start()
     {
+        // 初始化场景状态
         past.SetActive(false);
         now.SetActive(true);
 
-        // 初始化玩家位置为现在的位置
-        if (nowPosition != null)
+        // 初始化玩家位置为出生点位置
+        if (startPosition != null)
         {
+            player.transform.position = startPosition.position;
+        }
+        else if (nowPosition != null)
+        {
+            // 如果出生点位置未设置，则使用现在的位置作为默认出生点
             player.transform.position = nowPosition.position;
         }
     }
@@ -44,6 +51,9 @@ public class TimetravelController : MonoBehaviour
         {
             IntoNow();
         }
+
+        // 切换时间状态
+        time = !time;
     }
 
     private void IntoPast()
@@ -55,10 +65,9 @@ public class TimetravelController : MonoBehaviour
         }
 
         // 设置天空盒和场景状态
-        RenderSettings.skybox = Instantiate(pastSkyBox);
+        RenderSettings.skybox = pastSkyBox; // 直接赋值，不使用 Instantiate
         past.SetActive(true);
         now.SetActive(false);
-        time = true;
     }
 
     private void IntoNow()
@@ -70,9 +79,8 @@ public class TimetravelController : MonoBehaviour
         }
 
         // 设置天空盒和场景状态
-        RenderSettings.skybox = Instantiate(nowSkyBox);
+        RenderSettings.skybox = nowSkyBox; // 直接赋值，不使用 Instantiate
         now.SetActive(true);
         past.SetActive(false);
-        time = false;
     }
 }
