@@ -2,28 +2,28 @@ using UnityEngine;
 using UnityEngine.XR;
 using System.Collections;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
-using Image = UnityEngine.UI.Image;
+using UnityEngine.XR.Interaction.Toolkit;
+using System.Collections.Generic;
 
+[RequireComponent(typeof(CharacterController))]
 public class CameraTeleportSystem : MonoBehaviour
 {
     [Header("XR References")]
     public Transform xrOrigin;
-    public Transform vrCamera;
+    public Camera vrCamera;
+    public XRRig xrRig;
 
-    [Header("传送位置配置")]
-    public Transform positionWhenPourFalse;  // pour为false时的传送点
-    public Transform positionWhenPourTrue;   // pour为true时的传送点
+    [Header("Teleport Positions")]
+    public Transform positionWhenPourFalse;
+    public Transform positionWhenPourTrue;
 
-    [Header("过渡效果")]
+    [Header("Transition Settings")]
     public float fadeDuration = 0.5f;
+    public LayerMask teleportLayer;
 
-    [Header("输入设置")]
-    public KeyCode desktopConfirmKey = KeyCode.Space;
-
-    // 私有变量
-    private Image fadeImage;
-    private bool inTriggerZone = false;
+    private bool inTriggerZone;
+    public static bool isTeleporting { get; private set; }
+    private UnityEngine.UI.Image fadeImage;
 
     void Start()
     {
@@ -34,15 +34,34 @@ public class CameraTeleportSystem : MonoBehaviour
     void InitializeComponents()
     {
         if (xrOrigin == null)
-            xrOrigin = GameObject.Find("XR Origin").transform;
+            xrOrigin = GetComponent<Transform>();
+
+        if (xrRig == null)
+            xrRig = FindObjectOfType<XRRig>();
 
         if (vrCamera == null)
-            vrCamera = Camera.main.transform;
+            vrCamera = Camera.main;
+    }
+
+    void CreateFadeCanvas()
+    {
+        Canvas canvas = gameObject.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceCamera;
+        canvas.worldCamera = vrCamera;
+        canvas.planeDistance = 0.3f;
+
+        fadeImage = new GameObject("FadeImage").AddComponent<Image>();
+        fadeImage.transform.SetParent(canvas.transform, false);
+        fadeImage.rectTransform.anchorMin = Vector2.zero;
+        fadeImage.rectTransform.anchorMax = Vector2.one;
+        fadeImage.color = Color.clear;
+
+        canvas.gameObject.AddComponent<GraphicRaycaster>();
     }
 
     void Update()
     {
-        if (inTriggerZone && CheckConfirmInput())
+        if (inTriggerZone && CheckConfirmInput() && !isTeleporting)
         {
             StartCoroutine(TeleportSequence());
         }
@@ -50,89 +69,57 @@ public class CameraTeleportSystem : MonoBehaviour
 
     IEnumerator TeleportSequence()
     {
-        // 获取目标位置
+        isTeleporting = true;
         Transform targetPosition = GameManager.pour ? positionWhenPourTrue : positionWhenPourFalse;
 
-        // 淡出效果
         yield return StartCoroutine(FadeEffect(Color.black, fadeDuration));
 
-        // 执行传送
-        xrOrigin.position = targetPosition.position;
+        Vector3 controllerOffset = xrRig.transform.position - xrOrigin.position;
+        xrOrigin.position = targetPosition.position - controllerOffset;
         xrOrigin.rotation = targetPosition.rotation;
 
-        // 强制锁定摄像机
-        LockCameraPosition(targetPosition);
+        yield return new WaitForEndOfFrame();
 
-        // 淡入效果
         yield return StartCoroutine(FadeEffect(Color.clear, fadeDuration));
-    }
-
-    void LockCameraPosition(Transform target)
-    {
-        // 禁用Character Controller防止碰撞
-        CharacterController cc = xrOrigin.GetComponent<CharacterController>();
-        if (cc != null)
-        {
-            cc.enabled = false;
-            xrOrigin.position = target.position;
-            cc.enabled = true;
-        }
-
-        // 限制摄像机旋转轴
-        Vector3 newRotation = vrCamera.eulerAngles;
-        vrCamera.eulerAngles = new Vector3(newRotation.x, 0, 0);
-    }
-
-    #region 辅助功能
-    void CreateFadeCanvas()
-    {
-        GameObject canvasObj = new GameObject("FadeCanvas");
-        Canvas canvas = canvasObj.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 999;
-
-        fadeImage = new GameObject("FadeImage").AddComponent<Image>();
-        fadeImage.rectTransform.SetParent(canvas.transform, false);
-        fadeImage.rectTransform.anchorMin = Vector2.zero;
-        fadeImage.rectTransform.anchorMax = Vector2.one;
-        fadeImage.color = Color.clear;
+        isTeleporting = false;
     }
 
     bool CheckConfirmInput()
     {
-#if UNITY_ANDROID && !UNITY_EDITOR
-        return OVRInput.GetDown(OVRInput.Button.One);
-#else
-        return Input.GetKeyDown(desktopConfirmKey);
-#endif
+        var inputDevices = new List<InputDevice>();
+        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Right, inputDevices);
+
+        foreach (var device in inputDevices)
+        {
+            if (device.TryGetFeatureValue(CommonUsages.primaryButton, out bool pressed) && pressed)
+                return true;
+        }
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
     IEnumerator FadeEffect(Color targetColor, float duration)
     {
-        float timer = 0;
-        Color startColor = fadeImage.color;
+        float elapsed = 0;
+        Color originalColor = fadeImage.color;
 
-        while (timer < duration)
+        while (elapsed < duration)
         {
-            fadeImage.color = Color.Lerp(startColor, targetColor, timer / duration);
-            timer += Time.deltaTime;
+            fadeImage.color = Color.Lerp(originalColor, targetColor, elapsed / duration);
+            elapsed += Time.deltaTime;
             yield return null;
         }
         fadeImage.color = targetColor;
     }
-    #endregion
 
-    #region 触发检测
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if ((teleportLayer.value & (1 << other.gameObject.layer)) != 0)
             inTriggerZone = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if ((teleportLayer.value & (1 << other.gameObject.layer)) != 0)
             inTriggerZone = false;
     }
-    #endregion
 }
