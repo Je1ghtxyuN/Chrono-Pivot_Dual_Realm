@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -6,7 +7,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class VRItemSpawner : MonoBehaviour
 {
     [Header("XR References")]
-    public XRController rightHandController;
+    [Tooltip("如果未手动指定，将自动查找右手控制器")]
+    [SerializeField] private XRController rightHandController; // 添加SerializeField支持手动拖拽
     public Transform handController;
     public Transform targetObject;
 
@@ -22,16 +24,56 @@ public class VRItemSpawner : MonoBehaviour
 
     void Awake()
     {
+        // 初始化检测碰撞体
         detectionCollider = GetComponent<SphereCollider>();
         detectionCollider.radius = activationRadius;
         detectionCollider.isTrigger = true;
+
+        // 确保控制器初始化在Awake阶段完成
+        InitializeControllers();
+    }
+
+    void InitializeControllers()
+    {
+        // 优先使用手动拖入的控制器
+        if (rightHandController == null)
+        {
+            // 按名称查找控制器
+            rightHandController = GameObject.Find("RightHand Controller")?.GetComponent<XRController>();
+
+            // 备用方案：遍历查找
+            if (rightHandController == null)
+            {
+                foreach (var controller in FindObjectsOfType<XRController>())
+                {
+                    if (controller.inputDevice.characteristics.HasFlag(InputDeviceCharacteristics.Right))
+                    {
+                        rightHandController = controller;
+                        break;
+                    }
+                }
+            }
+        }
+
+        // 自动绑定手部变换组件
+        if (rightHandController != null && handController == null)
+        {
+            handController = rightHandController.transform;
+        }
     }
 
     void Start()
     {
         playerCamera = Camera.main.transform;
+        FinalCheckControllers();
+    }
+
+    void FinalCheckControllers()
+    {
         if (rightHandController == null)
-            rightHandController = FindObjectOfType<XRController>();
+        {
+            enabled = false; // 禁用脚本防止错误
+        }
     }
 
     void Update()
@@ -42,7 +84,8 @@ public class VRItemSpawner : MonoBehaviour
 
     bool CanSpawnItem()
     {
-        return !CameraTeleportSystem.isTeleporting &&
+        return rightHandController != null &&
+               !CameraTeleportSystem.isTeleporting &&
                IsPlayerInRange() &&
                IsFacingTarget() &&
                CheckTriggerInput();
@@ -61,38 +104,58 @@ public class VRItemSpawner : MonoBehaviour
 
     bool CheckTriggerInput()
     {
-        rightHandController.inputDevice.TryGetFeatureValue(
+        if (rightHandController.inputDevice.TryGetFeatureValue(
             CommonUsages.triggerButton,
-            out bool triggerPressed);
-        return triggerPressed;
+            out bool triggerPressed))
+        {
+            return triggerPressed;
+        }
+        return false;
     }
 
     void SpawnItemInHand()
     {
-        if (spawnedItem == null)
+        if (spawnedItem == null && handController != null)
         {
-            spawnedItem = Instantiate(spawnPrefab);
-            spawnedItem.transform.SetPositionAndRotation(
-                handController.position,
-                handController.rotation
-            );
+            spawnedItem = Instantiate(spawnPrefab, handController.position, handController.rotation);
+            spawnedItem.transform.SetParent(handController);
 
             if (spawnedItem.TryGetComponent(out Rigidbody rb))
                 rb.isKinematic = true;
-
-            spawnedItem.transform.SetParent(handController);
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if ((spawnLayer.value & (1 << other.gameObject.layer)) != 0)
-            gameObject.layer = spawnLayer;
+        if (IsInLayerMask(other.gameObject.layer, spawnLayer))
+        {
+            gameObject.layer = LayerMaskToLayer(spawnLayer);
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if ((spawnLayer.value & (1 << other.gameObject.layer)) != 0)
+        if (IsInLayerMask(other.gameObject.layer, spawnLayer))
+        {
             gameObject.layer = 0;
+        }
+    }
+
+    // 工具方法：将LayerMask转换为具体层级
+    int LayerMaskToLayer(LayerMask layerMask)
+    {
+        int layerNumber = 0;
+        int layer = layerMask.value;
+        while (layer > 0)
+        {
+            layer >>= 1;
+            layerNumber++;
+        }
+        return layerNumber - 1;
+    }
+
+    bool IsInLayerMask(int layer, LayerMask layerMask)
+    {
+        return layerMask == (layerMask | (1 << layer));
     }
 }

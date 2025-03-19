@@ -4,10 +4,15 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 [RequireComponent(typeof(CharacterController))]
 public class CameraTeleportSystem : MonoBehaviour
 {
+    [Header("Initial Position")]
+    [Tooltip("The initial position where the player will spawn")]
+    public Transform initialPosition;
+
     [Header("XR References")]
     public Transform xrOrigin;
     public Camera vrCamera;
@@ -29,6 +34,25 @@ public class CameraTeleportSystem : MonoBehaviour
     {
         InitializeComponents();
         CreateFadeCanvas();
+        if (xrOrigin != null)
+        {
+            SetInitialPosition();
+        }
+        else
+        {
+            UnityEngine.Debug.LogError("XR components not initialized properly!");
+        }
+    }
+
+    void SetInitialPosition()
+    {
+        if (initialPosition != null)
+        {
+            // Apply the same offset logic as teleportation
+            Vector3 controllerOffset = xrRig.transform.position - xrOrigin.position;
+            xrOrigin.position = initialPosition.position - controllerOffset;
+            xrOrigin.rotation = initialPosition.rotation;
+        }
     }
 
     void InitializeComponents()

@@ -14503,6 +14503,10 @@ PrefabInstance:
       propertyPath: m_CustomSkybox
       value: 
       objectReference: {fileID: 2100000, guid: d887473c17f1b3542b87e7827f1debf2, type: 2}
+    - target: {fileID: 7716211893740690835, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7776353527120668564, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_InteractionManager
       value: 
@@ -25489,11 +25493,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004606569}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f23d126d190e0e42b0afda95a3d0270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialPosition: {fileID: 1282303052}
   xrOrigin: {fileID: 1004606568}
   vrCamera: {fileID: 871291505}
   xrRig: {fileID: 0}
