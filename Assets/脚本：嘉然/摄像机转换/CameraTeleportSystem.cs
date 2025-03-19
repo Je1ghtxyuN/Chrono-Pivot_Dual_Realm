@@ -39,8 +39,8 @@ public class CameraTeleportSystem : MonoBehaviour
         if (xrRig == null)
             xrRig = FindObjectOfType<XRRig>();
 
-        if (vrCamera == null)
-            vrCamera = Camera.main;
+        if (vrCamera == null && xrRig != null)
+            vrCamera = xrRig.GetComponentInChildren<Camera>();
     }
 
     void CreateFadeCanvas()
