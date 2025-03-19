@@ -1,98 +1,98 @@
-using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(SphereCollider))]
 public class VRItemSpawner : MonoBehaviour
 {
-    [Header("VR Settings")]
-    public Transform targetObject;           // 需要注视的目标物体
-    public Transform handController;         // 生成物品的手部控制器
+    [Header("XR References")]
+    public XRController rightHandController;
+    public Transform handController;
+    public Transform targetObject;
 
-    [Header("Detection Settings")]
-    [SerializeField] private float activationRadius = 2f;
-    [SerializeField][Range(0.5f, 1f)] private float faceThreshold = 0.8f;
+    [Header("Spawn Settings")]
+    public GameObject spawnPrefab;
+    public LayerMask spawnLayer;
+    [Range(0.5f, 1f)] public float faceThreshold = 0.8f;
+    public float activationRadius = 2f;
 
-    [Header("Prefab Reference")]
-    public GameObject spawnPrefab;           // 要生成的预制体
-
-    private bool isPlayerInRange = false;
     private Transform playerCamera;
     private GameObject spawnedItem;
+    private SphereCollider detectionCollider;
 
-    private void Awake()
+    void Awake()
     {
-        ConfigureCollider();
+        detectionCollider = GetComponent<SphereCollider>();
+        detectionCollider.radius = activationRadius;
+        detectionCollider.isTrigger = true;
     }
 
-    private void Start()
+    void Start()
     {
         playerCamera = Camera.main.transform;
+        if (rightHandController == null)
+            rightHandController = FindObjectOfType<XRController>();
     }
 
-    private void Update()
+    void Update()
     {
-        if (CheckAllConditions())
-        {
+        if (CanSpawnItem())
             SpawnItemInHand();
-        }
     }
 
-    private bool CheckAllConditions()
+    bool CanSpawnItem()
     {
-        return isPlayerInRange &&
-               CheckFaceTarget() &&
+        return !CameraTeleportSystem.isTeleporting &&
+               IsPlayerInRange() &&
+               IsFacingTarget() &&
                CheckTriggerInput();
     }
 
-    private bool CheckFaceTarget()
+    bool IsPlayerInRange()
     {
-        Vector3 directionToTarget = (targetObject.position - playerCamera.position).normalized;
-        float dotProduct = Vector3.Dot(playerCamera.forward, directionToTarget);
-        return dotProduct >= faceThreshold;
+        return (spawnLayer.value & (1 << gameObject.layer)) != 0;
     }
 
-    private bool CheckTriggerInput()
+    bool IsFacingTarget()
     {
-        return Input.GetButtonDown("XRI_Right_Trigger");
+        Vector3 direction = (targetObject.position - playerCamera.position).normalized;
+        return Vector3.Dot(playerCamera.forward, direction) >= faceThreshold;
     }
 
-    private void SpawnItemInHand()
+    bool CheckTriggerInput()
+    {
+        rightHandController.inputDevice.TryGetFeatureValue(
+            CommonUsages.triggerButton,
+            out bool triggerPressed);
+        return triggerPressed;
+    }
+
+    void SpawnItemInHand()
     {
         if (spawnedItem == null)
         {
-            spawnedItem = Instantiate(spawnPrefab, handController.position, handController.rotation);
+            spawnedItem = Instantiate(spawnPrefab);
+            spawnedItem.transform.SetPositionAndRotation(
+                handController.position,
+                handController.rotation
+            );
+
+            if (spawnedItem.TryGetComponent(out Rigidbody rb))
+                rb.isKinematic = true;
+
             spawnedItem.transform.SetParent(handController);
-            AdjustItemPosition(spawnedItem.transform);
         }
     }
 
-    private void AdjustItemPosition(Transform item)
+    void OnTriggerEnter(Collider other)
     {
-        item.localPosition = Vector3.zero;
-        item.localRotation = Quaternion.identity;
+        if ((spawnLayer.value & (1 << other.gameObject.layer)) != 0)
+            gameObject.layer = spawnLayer;
     }
 
-    private void ConfigureCollider()
+    void OnTriggerExit(Collider other)
     {
-        SphereCollider collider = GetComponent<SphereCollider>();
-        collider.radius = activationRadius;
-        collider.isTrigger = true;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-        }
+        if ((spawnLayer.value & (1 << other.gameObject.layer)) != 0)
+            gameObject.layer = 0;
     }
 }
