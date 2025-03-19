@@ -10776,11 +10776,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6645594763366403460, guid: 707ea8befdccffc4fbfc0f4a3cdbc284, type: 3}
   m_PrefabInstance: {fileID: 1003153931}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1004606567 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5072718514985823417, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
-  m_PrefabInstance: {fileID: 1276416364}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1004606568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8072808451407606640, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
@@ -14458,7 +14453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3636729890109332178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.22
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 3636729890109332178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -14466,7 +14461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3636729890109332178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 16.38
+      value: 16.25
       objectReference: {fileID: 0}
     - target: {fileID: 3636729890109332178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -25494,13 +25489,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004606569}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1f23d126d190e0e42b0afda95a3d0270, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 1004606568}
-  vrCamera: {fileID: 1004606567}
+  vrCamera: {fileID: 871291505}
   xrRig: {fileID: 0}
   positionWhenPourFalse: {fileID: 906681579}
   positionWhenPourTrue: {fileID: 333585594}
