@@ -1,17 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:Assets/机关预制件/拼好箭.prefab.meta
 guid: 36b608285088be248ae5a961fd1e7f9e
-========
-guid: bd55f707853af7342afc287b08c4e87c
->>>>>>>> Stashed changes:Assets/场景素材/编钟/2/编钟 (内含空白物体）.prefab.meta
-=======
-<<<<<<<< Updated upstream:Assets/防止数据丢失/保护性改动as811_/好的城市有围墙.prefab.meta
-guid: 8d715647ee6e4c444b4a9a0e2449dddf
-========
-guid: 18f679e5baa855142b72339635700967
->>>>>>>> Stashed changes:Assets/机关预制件/拼好箭.prefab.meta
->>>>>>> Stashed changes
 PrefabImporter:
   externalObjects: {}
   userData: 
