@@ -4678,6 +4678,7 @@ GameObject:
   - component: {fileID: 301840601}
   - component: {fileID: 301840600}
   - component: {fileID: 301840599}
+  - component: {fileID: 301840602}
   m_Layer: 0
   m_Name: Square Sticker 01
   m_TagString: Untagged
@@ -4743,13 +4744,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 301840598}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 39.085, y: 503.67, z: 90.462}
-  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_LocalRotation: {x: 0.005795538, y: 0.005795538, z: 0.70708305, w: 0.70708305}
+  m_LocalPosition: {x: 22.220924, y: 19.37154, z: -9.152526}
+  m_LocalScale: {x: 111.04402, y: 111.044014, z: 111.04402}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 90}
+  m_Father: {fileID: 543450653454071137}
+  m_LocalEulerAnglesHint: {x: 0, y: 0.939, z: 90}
+--- !u!114 &301840602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 301840598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74fe7454230f4884ba761eb66e1dc8ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textComponent: {fileID: 0}
+  textToDisplay: (2,1) (1,3) (2,2) (1,1) (2,5) (2,3)
+  textColor: {r: 0.098039225, g: 0.098039225, b: 0.098039225, a: 1}
+  fontSize: 40
 --- !u!1001 &305657998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24503,6 +24520,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 46.587
       objectReference: {fileID: 0}
+    - target: {fileID: 3568802562275346520, guid: 6eb4380cab4f30a48bb55363e9ad97ca, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6440375964098702016, guid: 6eb4380cab4f30a48bb55363e9ad97ca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 14.5426655
@@ -24561,7 +24582,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 6440375964098702016, guid: 6eb4380cab4f30a48bb55363e9ad97ca, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 301840601}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7334802027462128921, guid: 6eb4380cab4f30a48bb55363e9ad97ca, type: 3}
       insertIndex: -1
@@ -24848,4 +24872,3 @@ SceneRoots:
   - {fileID: 1454996587}
   - {fileID: 888826103}
   - {fileID: 876874554}
-  - {fileID: 301840601}
