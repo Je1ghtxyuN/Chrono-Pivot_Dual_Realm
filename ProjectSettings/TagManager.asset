@@ -5,6 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Camera0
+  - water
+  - rock
+  - grass
+  - wood
+  - concrete
+  - Grabbable
+  - "\u6C34\u9F99\u5934"
   layers:
   - Default
   - TransparentFX
