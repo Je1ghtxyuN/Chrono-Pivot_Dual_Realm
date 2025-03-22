@@ -21524,7 +21524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36d3ddafc7d0d864dac1ab24309fdb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1482876753}
   past: {fileID: 1785780261}
   pastSkyBox: {fileID: 2100000, guid: de1d750fefeeac642bf9b11a3978ccf5, type: 2}
   now: {fileID: 779749323}
