@@ -95,4 +95,9 @@ public class BeClocked : MonoBehaviour
         // 调用 ClockController 的 PlayOnce 方法，传入当前编钟对象
         clockController.PlayOnce(this);
     }
+    //调试用
+    private void OnCollisionEnter(Collision collision)
+    {
+        Clock();
+    }
 }
