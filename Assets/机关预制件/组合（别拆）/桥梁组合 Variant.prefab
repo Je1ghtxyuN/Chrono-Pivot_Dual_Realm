@@ -398,7 +398,7 @@ PrefabInstance:
       objectReference: {fileID: 5529037981904001258}
     - target: {fileID: 1026649071486827325, guid: 4b394173509e4f8408dbf4054fb2a5ba, type: 3}
       propertyPath: rotateSpeed
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1026649071486827325, guid: 4b394173509e4f8408dbf4054fb2a5ba, type: 3}
       propertyPath: stopController
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 8793192589000181934}
-  speed: 30
+  speed: 50
 --- !u!4 &3461780455704976012 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 211036167437185779, guid: 4b394173509e4f8408dbf4054fb2a5ba, type: 3}

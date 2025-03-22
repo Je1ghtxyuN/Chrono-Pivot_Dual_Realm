@@ -13,34 +13,33 @@ public class BeClocked : MonoBehaviour
         clockController=FindObjectOfType<ClockController>();
         beClocked = GetComponent<BeClocked>();
     }
-    private void OnTriggerEnter(Collider other)
+    public void Clock()
     {
-        if (other.CompareTag("Player"))
-        {
+        
             Debug.Log("碰到了");
-            if (clockController.nowClockedNum < clockController.maxNum)
-            {
+        if (clockController.nowClockedNum < clockController.maxNum)
+        {
 
-                if (beClocked == clockController.beClockeds[clockController.nowClockedNum])
-                {
-                    isClocked = true;
-                    FindObjectOfType<ClockController>().PlayOnce();
-                    Debug.Log("顺序正确");
-                }
-                //顺序不对，重置
-                else
-                {
-                    isClocked = false;
-                    clockController.nowClockedNum = 0;
-                    clockController.nowNum = 0;
-                    Debug.Log("重置");
-                }
+            if (beClocked == clockController.beClockeds[clockController.nowClockedNum])
+            {
+                isClocked = true;
+                FindObjectOfType<ClockController>().PlayOnce();
+                Debug.Log("顺序正确");
             }
+            //顺序不对，重置
             else
             {
-                Debug.Log("已完成，请勿重复碰钟表");
+                isClocked = false;
+                clockController.nowClockedNum = 0;
+                clockController.nowNum = 0;
+                Debug.Log("重置");
             }
         }
+        else
+        {
+            Debug.Log("已完成，请勿重复碰钟表");
+        }
+        
         
         
     }
