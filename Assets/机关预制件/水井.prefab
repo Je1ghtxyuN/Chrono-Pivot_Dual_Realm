@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 311424128493029358}
   - component: {fileID: 7008635453704401668}
   - component: {fileID: 4986515519731771725}
+  - component: {fileID: -5691210859217263479}
   m_Layer: 0
   m_Name: "\u6C34\u4E95"
   m_TagString: Untagged
@@ -266,3 +267,21 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5691210859217263479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5690941625762551762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50f69b245bfd2f4d9ba09484031ce23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  cameraA: {fileID: 0}
+  cameraB: {fileID: 0}
+  rayInteractor: {fileID: 0}
+  moveProvider: {fileID: 0}
+  teleportProvider: {fileID: 0}
