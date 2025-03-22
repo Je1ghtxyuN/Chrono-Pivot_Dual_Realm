@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimetravelController : MonoBehaviour
@@ -18,6 +17,9 @@ public class TimetravelController : MonoBehaviour
     public Transform startPosition; // 游戏开始时的出生点位置
 
     public PICOLeftJoystickMovement movementController;
+
+    [Header("摄像机")]
+    public Camera mainCamera; // 引用主摄像机
 
     [Header("时间插值")]
     public float up = 500f;
@@ -46,12 +48,18 @@ public class TimetravelController : MonoBehaviour
             // 如果出生点位置未设置，则使用现在的位置作为默认出生点
             player.transform.position = nowPosition.position;
         }
+
+        // 确保摄像机已设置
+        if (mainCamera == null)
+        {
+            Debug.LogError("Main Camera is not assigned in the inspector!");
+        }
     }
 
     private IEnumerator TimetravelWithDelay()
     {
         Debug.Log("加载中...");
-        yield return new WaitForSeconds(0); 
+        yield return new WaitForSeconds(0);
 
         // 执行时间旅行逻辑
         if (time == false)
@@ -67,10 +75,9 @@ public class TimetravelController : MonoBehaviour
         time = !time;
     }
 
-
     public void Timetravel()
     {
-        StartCoroutine(TimetravelWithDelay()); 
+        StartCoroutine(TimetravelWithDelay());
     }
 
     private void IntoPast()
@@ -82,7 +89,7 @@ public class TimetravelController : MonoBehaviour
         }
 
         // 设置天空盒和场景状态
-        RenderSettings.skybox = pastSkyBox; // 直接赋值，不使用 Instantiate
+        ChangeSkybox(pastSkyBox); // 切换到过去的天空盒
         past.SetActive(true);
         now.SetActive(false);
 
@@ -96,7 +103,6 @@ public class TimetravelController : MonoBehaviour
             player.transform.position = pastPosition.position;
         }
 
-        RenderSettings.skybox = pastSkyBox;
         past.SetActive(true);
         now.SetActive(false);
 
@@ -115,7 +121,7 @@ public class TimetravelController : MonoBehaviour
         }
 
         // 设置天空盒和场景状态
-        RenderSettings.skybox = nowSkyBox; // 直接赋值，不使用 Instantiate
+        ChangeSkybox(nowSkyBox); // 切换到现在的天空盒
         now.SetActive(true);
         past.SetActive(false);
 
@@ -129,13 +135,32 @@ public class TimetravelController : MonoBehaviour
             player.transform.position = nowPosition.position;
         }
 
-        RenderSettings.skybox = nowSkyBox;
         now.SetActive(true);
         past.SetActive(false);
 
         if (movementController != null)
         {
             movementController.enabled = true; // 启用移动逻辑
+        }
+    }
+
+    // 修改摄像机的天空盒
+    private void ChangeSkybox(Material skyboxMaterial)
+    {
+        if (mainCamera != null && skyboxMaterial != null)
+        {
+            // 获取摄像机的Skybox组件
+            Skybox cameraSkybox = mainCamera.GetComponent<Skybox>();
+            if (cameraSkybox == null)
+            {
+                // 如果摄像机没有Skybox组件，则添加一个
+                cameraSkybox = mainCamera.gameObject.AddComponent<Skybox>();
+            }
+            cameraSkybox.material = skyboxMaterial; // 设置天空盒材质
+        }
+        else
+        {
+            Debug.LogError("Main Camera or Skybox Material is not assigned!");
         }
     }
 }

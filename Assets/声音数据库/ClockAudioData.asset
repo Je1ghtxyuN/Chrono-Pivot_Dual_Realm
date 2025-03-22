@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712888de6e6802549b701f9af5b2a3e6, type: 3}
+  m_Name: ClockAudioData
+  m_EditorClassIdentifier: 
+  FootstepAudio:
+  - Tag: clock1
+    AudioClips:
+    - {fileID: 8300000, guid: 16558624859be034c9784da43af4dffa, type: 3}
+    Delay: 0
+  - Tag: clock2
+    AudioClips:
+    - {fileID: 8300000, guid: 31455100ed5727c4980388f2000e5bf2, type: 3}
+    Delay: 0
+  - Tag: clock3
+    AudioClips:
+    - {fileID: 8300000, guid: 4fb5280ea57b3bc408412d57a3397acb, type: 3}
+    Delay: 0
+  - Tag: clock4
+    AudioClips:
+    - {fileID: 8300000, guid: 9ce536ac553d4964ca2300f3d261e7f7, type: 3}
+    Delay: 0
+  - Tag: clock5
+    AudioClips:
+    - {fileID: 8300000, guid: a3508ffbda963b84996d46c781cc8d1e, type: 3}
+    Delay: 0
+  - Tag: clock6
+    AudioClips:
+    - {fileID: 8300000, guid: a730311b87c29654797700ba3726485c, type: 3}
+    Delay: 0
+  - Tag: clock7
+    AudioClips:
+    - {fileID: 8300000, guid: 8ff8581f31e5fd242be86fba9e5dc96f, type: 3}
+    Delay: 0
+  - Tag: clock8
+    AudioClips:
+    - {fileID: 8300000, guid: 51ce13af7d28ade4582c2f67321a4c3d, type: 3}
+    Delay: 0
+  - Tag: clock9
+    AudioClips:
+    - {fileID: 8300000, guid: 251e08f83e152b14f9784419bd7cf244, type: 3}
+    Delay: 0
+  - Tag: clock10
+    AudioClips:
+    - {fileID: 8300000, guid: 2d145e6193f77e54d89fa79ff0660c29, type: 3}
+    Delay: 0
+  - Tag: clock11
+    AudioClips: []
+    Delay: 0
+  - Tag: clock12
+    AudioClips: []
+    Delay: 0
