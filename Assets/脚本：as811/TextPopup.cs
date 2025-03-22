@@ -35,8 +35,8 @@ public class TextPopup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //if(other.CompareTag("Player"))
-        if (true) // ´ý¶¨
+        if (other.CompareTag("Player"))
+            if (true) // ´ý¶¨
         {
             StartDisplay();
             Debug.Log("Player entered the trigger");
