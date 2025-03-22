@@ -10,8 +10,13 @@ public class StarMapController : MonoBehaviour
 {
     private ShotController shotController;
     private XRRayInteractor rightRayInteractor; // 右手柄射线组件
+    public Transform arrow;
+    private Transform aim;
+    private ArrowCarController arrowCar;
     private void Start()
     {
+        arrowCar=FindObjectOfType<ArrowCarController>();
+        aim=arrowCar.GetComponent<Transform>();
         shotController=FindObjectOfType<ShotController>();
         rightRayInteractor = GetRayInteractor(XRNode.RightHand);
         if (rightRayInteractor == null)
@@ -28,7 +33,7 @@ public class StarMapController : MonoBehaviour
         bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
 
         // 如果被右手柄射线瞄准且按下扳机键，调用 Clock() 函数
-        if (isHighlighted && isRightTriggerPressed)
+        if (isHighlighted && isRightTriggerPressed&&arrow.position==aim.position)
         {
             shotController.ArrowShot();
         }
