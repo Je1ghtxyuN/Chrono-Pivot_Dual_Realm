@@ -8,12 +8,10 @@ public class ShotController : MonoBehaviour
     public Rigidbody arrow;
     public float speed;
    
-    private void OnTriggerEnter(Collider other)
+    public void ArrowShot()
     {
-        if(other.CompareTag("Player"))
-        {
-            arrow.velocity = new Vector3(0, 0, -speed);
-        }
+        arrow.velocity = new Vector3(0, 0, -speed);
+        Debug.Log("Éä¼ý");
     }
     
 }

@@ -25,6 +25,11 @@ public class TimetravelController : MonoBehaviour
     // false为现在，true为过去
     private bool time = false;
 
+    public bool GetTime()
+    {
+        return time;
+    }
+
     private void Start()
     {
         // 初始化场景状态

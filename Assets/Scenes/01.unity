@@ -1137,6 +1137,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!4 &77697510 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8072808451407606640, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
+  m_PrefabInstance: {fileID: 535585053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &82489993 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5470554254124334901, guid: 387116b5daff37e4ba7915f8575d5229, type: 3}
@@ -2390,9 +2395,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f698675ec3851884e9a99c7e3598fba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAnchor: {fileID: 0}
-  xrRig: {fileID: 0}
-  yOffset: 0.1
+  teleportAnchortrue: {fileID: 1924570096}
+  teleportAnchorfalse: {fileID: 2044496106}
+  xrRig: {fileID: 77697510}
+  yOffset: 0
 --- !u!1001 &116239841
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3103,7 +3109,7 @@ GameObject:
   - component: {fileID: 176015113}
   - component: {fileID: 176015112}
   m_Layer: 0
-  m_Name: "\u5168\u5C40\u53D8\u91CFpour"
+  m_Name: "\u94A5\u5319\u6C34\u4E95\u6728\u6876\u53D8\u91CF\u63A7\u5236\u5668"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15700,8 +15706,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f698675ec3851884e9a99c7e3598fba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teleportAnchor: {fileID: 0}
-  xrRig: {fileID: 0}
+  teleportAnchortrue: {fileID: 1924570096}
+  teleportAnchorfalse: {fileID: 2044496106}
+  xrRig: {fileID: 77697510}
   yOffset: 0
 --- !u!1001 &1128805815
 PrefabInstance:

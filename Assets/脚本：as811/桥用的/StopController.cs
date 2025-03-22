@@ -5,14 +5,10 @@ using UnityEngine;
 public class StopController : MonoBehaviour
 {
     public Rigidbody arrow;
-    public float speed;
 
-    private void OnTriggerEnter(Collider other)
+
+    public void Stop()
     {
-        if (other.CompareTag("¼ý"))
-        {
-            arrow.velocity = new Vector3(0, 0, 0);
-        }
+        arrow.velocity=new Vector3(0f, 0f, 0f);
     }
-
 }

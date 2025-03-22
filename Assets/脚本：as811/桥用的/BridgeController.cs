@@ -11,7 +11,7 @@ public class BridgeController : MonoBehaviour
     public ParticleController particleController;
     //需要改旋转的目标角度时改这里
     private Quaternion targetRot = Quaternion.LookRotation(Vector3.forward);
-    
+    public StopController stopController;
     
     private bool isTriggered = false;
     private Quaternion initialRotation;
@@ -34,36 +34,35 @@ public class BridgeController : MonoBehaviour
         if (other.transform == arrow)
         {
             isTriggered = true;
-            Debug.Log("Enter");
+            
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if (other.transform == bridge)
+        if (other.transform == arrow)
         {
-            isTriggered = false;
+            stopController.Stop();
         }
     }
-
+    private void Rotate()
+    {
+       
+    }
     void Update()
     {
         if (bridge.rotation == targetRot && !defend)
         {
             StartCoroutine(particleController.PlayAndStop());
             defend = true;
+            isTriggered = false;
         }
-        if (isTriggered)
-        {
-            // 旋转插值
-            
-            bridge.rotation = Quaternion.Slerp(
-                bridge.rotation,
-                targetRot,
-                Time.deltaTime * rotateSpeed
-            );
-            
-        }
+        if(isTriggered)
+        bridge.rotation = Quaternion.Slerp(
+               bridge.rotation,
+               targetRot,
+               Time.deltaTime * rotateSpeed
+           );
 
     }
 }
