@@ -310,6 +310,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bf36f78a28d607b468d38fc84f3884be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a7b0fec2aede632498d5c934dc90de33, type: 2}
     - target: {fileID: 919132149155446097, guid: bf36f78a28d607b468d38fc84f3884be, type: 3}
       propertyPath: m_Name
       value: "\u57FA\u5EA7"
@@ -431,7 +435,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b46166861b8d25f47be04abb68a787b3, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7a2bada18978f16419fe38f7a2f04141, type: 2}
+      objectReference: {fileID: 2100000, guid: a7b0fec2aede632498d5c934dc90de33, type: 2}
     - target: {fileID: 919132149155446097, guid: b46166861b8d25f47be04abb68a787b3, type: 3}
       propertyPath: m_Name
       value: "\u52FA\u5B50"
@@ -571,6 +575,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 7a9138d0e1255aa49a23ad9e19178c71, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 855a144877a2950428759354f5cdb1f0, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 7a9138d0e1255aa49a23ad9e19178c71, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 855a144877a2950428759354f5cdb1f0, type: 2}
     - target: {fileID: 919132149155446097, guid: 7a9138d0e1255aa49a23ad9e19178c71, type: 3}
       propertyPath: m_Name
       value: SM_treeslot
