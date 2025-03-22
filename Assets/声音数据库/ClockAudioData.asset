@@ -51,11 +51,13 @@ MonoBehaviour:
     Delay: 0
   - Tag: clock10
     AudioClips:
-    - {fileID: 8300000, guid: 2d145e6193f77e54d89fa79ff0660c29, type: 3}
+    - {fileID: 8300000, guid: 33159677dab9c3e419d4ea1108be1d53, type: 3}
     Delay: 0
   - Tag: clock11
-    AudioClips: []
+    AudioClips:
+    - {fileID: 8300000, guid: 2d145e6193f77e54d89fa79ff0660c29, type: 3}
     Delay: 0
   - Tag: clock12
-    AudioClips: []
+    AudioClips:
+    - {fileID: 8300000, guid: 506bbc542be0845489165f5468908262, type: 3}
     Delay: 0
