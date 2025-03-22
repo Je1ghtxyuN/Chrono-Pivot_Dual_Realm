@@ -189,6 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf721c7e8f37ab4c997501ee982e965, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &268936284 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 8900993968080576693, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
+  m_PrefabInstance: {fileID: 1879654850}
+  m_PrefabAsset: {fileID: 0}
 --- !u!198 &273390113 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 5724846863120158152, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
@@ -871,7 +876,7 @@ GameObject:
   - component: {fileID: 1622651250}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1013,6 +1018,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 811450382768721014, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
+      propertyPath: FootstepAudioSource
+      value: 
+      objectReference: {fileID: 268936284}
     - target: {fileID: 3482461092950990178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
       propertyPath: m_Name
       value: Player
