@@ -15,6 +15,8 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
     private XRSimpleInteractable parentInteractable; // 父物体的交互组件
 
     private XRRayInteractor rayInteractor; // 射线组件
+    [Header("被滴穿的物体")]
+    public DisAppearController disAppearController; // 水滴穿过后消失的物体
 
     void Start()
     {
@@ -47,7 +49,7 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
                 Debug.LogError("Animator not found on the object!");
             }
         }
-
+        disAppearController = FindObjectOfType<DisAppearController>();
         // 订阅场景加载事件
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -104,6 +106,7 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
                 {
                     particleEffect.Play();
                     Debug.LogWarning("粒子效果已开启。");
+                    disAppearController.DisAppear();
                 }
             }
             else

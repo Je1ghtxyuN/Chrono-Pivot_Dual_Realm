@@ -17,7 +17,7 @@ public class ClockController : MonoBehaviour
     public int nowNum = 0; // 当前敲击的正确编钟数量
     public int nowClockedNum = 0; // 当前敲击的编钟总数
 
-    private ShotController shotController;
+    private DoorController doorController;
     private AudioSource audioSource; // 用于播放音效的 AudioSource
 
     [Header("声音数据库")]
@@ -25,7 +25,7 @@ public class ClockController : MonoBehaviour
 
     private void Start()
     {
-        shotController = FindObjectOfType<ShotController>();
+        doorController = FindObjectOfType<DoorController>();
 
         // 初始化 AudioSource
         audioSource = gameObject.AddComponent<AudioSource>();
@@ -50,7 +50,6 @@ public class ClockController : MonoBehaviour
             Debug.LogError("Correct Order Clocks list is not assigned or empty!");
         }
     }
-
     public void PlayOnce(BeClocked clock)
     {
         // 播放对应编钟的音效
@@ -65,7 +64,7 @@ public class ClockController : MonoBehaviour
             // 如果全部正确敲击，触发额外逻辑
             if (nowNum == maxNum)
             {
-                shotController.ArrowShot();
+                doorController.Open();
             }
         }
         else
