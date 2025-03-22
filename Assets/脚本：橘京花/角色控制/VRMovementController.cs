@@ -73,4 +73,10 @@ public class PICOLeftJoystickMovement : MonoBehaviour
         cameraRight.y = 0;
         return (cameraForward.normalized * joystickInput.y + cameraRight.normalized * joystickInput.x).normalized;
     }
+
+    // 判断玩家是否在移动
+    public bool IsMoving()
+    {
+        return joystickInput.magnitude >= deadZone;
+    }
 }
