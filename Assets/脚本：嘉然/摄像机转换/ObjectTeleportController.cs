@@ -5,7 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class ObjectTeleportController : MonoBehaviour
 {
     [Header("传送设置")]
-    public Transform teleportAnchor;  // 目标传送点
+    public Transform teleportAnchortrue; // 当pour为true时的目标点
+    public Transform teleportAnchorfalse; // 当pour为false时的目标点
     public Transform xrRig;           // XR Rig父物体
     public float yOffset = 0.1f;      // 地面高度补偿
 
@@ -13,6 +14,11 @@ public class ObjectTeleportController : MonoBehaviour
     private Quaternion originalRotation; // 初始旋转
     private bool isLocked = false;     // 锁定状态
     private CharacterController characterController; // 角色控制器
+
+    private Transform GetCurrentAnchor()//实际传送位置
+    {
+        return GameManager.pour ? teleportAnchortrue : teleportAnchorfalse;
+    }
 
     void Start()
     {
@@ -45,8 +51,8 @@ public class ObjectTeleportController : MonoBehaviour
     void TeleportToAnchor()
     {
         // 计算最终位置（包含高度补偿）
-        Vector3 targetPos = teleportAnchor.position + Vector3.up * yOffset;
-        Quaternion targetRot = teleportAnchor.rotation;
+        Vector3 targetPos = GetCurrentAnchor().position + Vector3.up * yOffset;
+        Quaternion targetRot = GetCurrentAnchor().rotation;
 
         // 移动XR Rig并同步角色控制器
         xrRig.SetPositionAndRotation(targetPos, targetRot);
@@ -77,23 +83,12 @@ public class ObjectTeleportController : MonoBehaviour
 
     void SyncCharacterController()
     {
-        // 同步角色控制器位置（解决碰撞问题）
+        // 同步角色控制器位置
         if (characterController)
         {
             characterController.enabled = false;
             characterController.transform.position = xrRig.position;
             characterController.enabled = true;
-        }
-    }
-
-    // 可选：在编辑器可视化传送路径
-    void OnDrawGizmosSelected()
-    {
-        if (teleportAnchor && xrRig)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(transform.position, teleportAnchor.position);
-            Gizmos.DrawWireSphere(teleportAnchor.position, 0.2f);
         }
     }
 }
