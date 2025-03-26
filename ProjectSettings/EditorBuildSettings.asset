@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: "Assets/Scenes/\u5168\u5C40\u5907\u4EFD\u573A\u666F/01-\u5907\u4EFD6.unity"
     guid: 4631681baf316f14985ced6f75c5f187
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/testscene.unity
     guid: 46a4b771eb83cfd45986358977e06fde
   - enabled: 0
     path: "Assets/Scenes/\u5F00\u59CB\u83DC\u5355/rebuildStartMenu.unity"
     guid: ed8e758f7d620ef448b838d2a5adb9ff
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/01.unity
     guid: b530abf64a7c6aa4893966c4fe65e700
   - enabled: 0

@@ -43,10 +43,11 @@ public class TextPopup : MonoBehaviour
         }
     }
 
-    void StartDisplay()
+    public void StartDisplay()
     {
         if (displayCoroutine != null) StopCoroutine(displayCoroutine);
         displayCoroutine = StartCoroutine(DisplayText());
+        Debug.Log("±‡÷”¥∞∏œ‘ æ");
     }
 
     IEnumerator DisplayText()

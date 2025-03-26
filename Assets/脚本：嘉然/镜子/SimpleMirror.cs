@@ -4,7 +4,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SimpleMirror : MonoBehaviour
 {
     [SerializeField] float rotateAngle = 45f;
-    private bool isRotated = false;
+    public bool isRotated = false;
     private Vector3 originalRotation;
 
     void Start()
