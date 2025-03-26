@@ -9,51 +9,65 @@ public class MenuController : MonoBehaviour
     public float distanceFromCamera = 2.0f; // 菜单与摄像头的距离
 
     private bool isMenuVisible = false;
+    private InputDevice rightHandDevice;
+    private bool wasMenuButtonPressed = false; // 跟踪上一帧的按钮状态
 
     void Start()
     {
-        // 初始化时将所有Canvas设置为非激活状态
-        SetAllCanvasesActive(false);
+        SetAllCanvasesActive(false); // 初始化隐藏菜单
+        InitializeRightHandDevice();  // 初始化右手设备
     }
 
     void Update()
     {
-        // 检测菜单键是否被按下（单击）
-        if (InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonPressed) && menuButtonPressed)
+        // 如果设备无效，尝试重新初始化
+        if (!rightHandDevice.isValid)
         {
-            Debug.LogWarning("检测到菜单键被按下。");
-            ToggleMenu();
+            InitializeRightHandDevice();
         }
 
-        // 如果菜单可见，将所有Canvas放置在摄像头前方
+        // 检测菜单键状态变化
+        if (rightHandDevice.TryGetFeatureValue(CommonUsages.menuButton, out bool isMenuButtonPressed))
+        {
+            // 只有当按钮从"按下"变为"未按下"时才切换菜单
+            if (isMenuButtonPressed && !wasMenuButtonPressed)
+            {
+                ToggleMenu();
+            }
+            wasMenuButtonPressed = isMenuButtonPressed;
+        }
+
+        // 如果菜单可见，更新位置
         if (isMenuVisible)
         {
             PositionAllCanvasesInFrontOfCamera();
         }
     }
 
-    void ToggleMenu()
+    private void InitializeRightHandDevice()
     {
-        // 切换菜单状态
-        isMenuVisible = !isMenuVisible;
-
-        // 设置所有Canvas的激活状态
-        SetAllCanvasesActive(isMenuVisible);
-
-        // 输出菜单状态
-        if (isMenuVisible)
+        var rightHandDevices = new List<InputDevice>();
+        InputDevices.GetDevicesAtXRNode(XRNode.RightHand, rightHandDevices);
+        if (rightHandDevices.Count > 0)
         {
-            Debug.LogWarning("所有菜单已显示。");
+            rightHandDevice = rightHandDevices[0];
+            Debug.Log("Right hand device initialized: " + rightHandDevice.name);
         }
         else
         {
-            Debug.LogWarning("所有菜单已隐藏。");
+            Debug.LogWarning("Right hand device not found!");
         }
+    }
+
+    void ToggleMenu()
+    {
+        isMenuVisible = !isMenuVisible;
+        SetAllCanvasesActive(isMenuVisible);
+        Debug.Log(isMenuVisible ? "菜单已显示" : "菜单已隐藏");
     }
 
     void SetAllCanvasesActive(bool isActive)
     {
-        // 设置所有Canvas的激活状态
         foreach (var canvas in menuCanvases)
         {
             if (canvas != null)
@@ -65,7 +79,6 @@ public class MenuController : MonoBehaviour
 
     void PositionAllCanvasesInFrontOfCamera()
     {
-        // 将所有Canvas放置在摄像头前方
         foreach (var canvas in menuCanvases)
         {
             if (canvas != null)
@@ -75,7 +88,5 @@ public class MenuController : MonoBehaviour
                 canvas.transform.rotation = Quaternion.LookRotation(canvas.transform.position - cameraTransform.position);
             }
         }
-
-        Debug.LogWarning("所有菜单已放置在摄像头前方。");
     }
 }

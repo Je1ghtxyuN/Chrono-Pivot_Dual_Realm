@@ -24,11 +24,15 @@ TagManager:
   - clock10
   - clock11
   - clock12
+  - mirror
+  - Target
+  - Laser
+  - Mirror
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Mirror
   - Water
   - UI
   - 

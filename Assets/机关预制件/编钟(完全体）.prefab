@@ -3016,12 +3016,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054eb0bf859071946834475b73b7dd38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beClockeds:
-  - {fileID: 7070022415854308913}
-  - {fileID: 5969093365176882885}
-  - {fileID: 5121094036715575456}
-  - {fileID: 2403132560884282354}
-  - {fileID: 8567870140784514038}
+  allClocks: []
+  correctOrderClocks: []
   maxNum: 5
   nowNum: 0
   nowClockedNum: 0
