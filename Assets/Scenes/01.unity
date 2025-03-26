@@ -13286,6 +13286,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockModular02
       objectReference: {fileID: 0}
+    - target: {fileID: 2188899467751584400, guid: bcaa1650c18aef643963fc0f48366198, type: 3}
+      propertyPath: m_TagString
+      value: grass
+      objectReference: {fileID: 0}
     - target: {fileID: 2899141335091576963, guid: bcaa1650c18aef643963fc0f48366198, type: 3}
       propertyPath: m_LocalScale.x
       value: 50
@@ -24808,7 +24812,7 @@ GameObject:
   - component: {fileID: 1688157067}
   m_Layer: 0
   m_Name: scene2
-  m_TagString: Untagged
+  m_TagString: rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
