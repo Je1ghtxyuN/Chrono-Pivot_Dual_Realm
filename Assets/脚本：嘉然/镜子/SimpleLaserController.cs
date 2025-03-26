@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -5,7 +6,7 @@ public class SimpleLaserController : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] float maxDistance = 50f;
-    [SerializeField] int maxBounces = 6;        // 最大弹射次数
+    [SerializeField] int maxBounces = 4;        // 最大弹射次数
     [SerializeField] float surfaceOffset = 0.01f; // 表面偏移量
 
     [Header("Debug")]
@@ -64,15 +65,37 @@ public class SimpleLaserController : MonoBehaviour
 
     private void HandleMirrorInteraction(RaycastHit hit)
     {
-        if (hit.collider.CompareTag("Mirror"))
+        GameObject hitObject = hit.collider.gameObject;
+
+        // Target检测
+        if (hitObject.CompareTag("Target") &&
+            hitObject.layer == LayerMask.NameToLayer("Mirror"))
         {
-            if (hit.collider.gameObject != _lastHitMirror)
+            if (_lastHitMirror != hitObject)
             {
-                var mirror = hit.collider.GetComponent<SimpleMirror>();
+                UnityEngine.Debug.Log("大吕，姑洗，夹钟，黄钟，仲吕");
+                _lastHitMirror = hitObject;
+
+                // 调用 TextPopup 的 StartDisplay()
+                TextPopup textPopup = hitObject.GetComponent<TextPopup>();
+                if (textPopup != null)
+                {
+                    textPopup.StartDisplay();
+                }
+            }
+            return;
+        }
+
+        // 镜子交互逻辑
+        if (hitObject.CompareTag("Mirror"))
+        {
+            if (_lastHitMirror != hitObject)
+            {
+                var mirror = hitObject.GetComponent<SimpleMirror>();
                 if (mirror != null)
                 {
                     mirror.Rotate();
-                    _lastHitMirror = hit.collider.gameObject;
+                    _lastHitMirror = hitObject;
                 }
             }
         }

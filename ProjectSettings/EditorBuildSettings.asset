@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: "Assets/Scenes/\u5168\u5C40\u5907\u4EFD\u573A\u666F/01-\u5907\u4EFD6.unity"
     guid: 4631681baf316f14985ced6f75c5f187
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/testscene.unity
     guid: 46a4b771eb83cfd45986358977e06fde
   - enabled: 0
