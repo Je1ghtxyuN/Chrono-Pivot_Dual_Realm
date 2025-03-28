@@ -28,6 +28,7 @@ TagManager:
   - Target
   - Laser
   - Mirror
+  - Well
   layers:
   - Default
   - TransparentFX

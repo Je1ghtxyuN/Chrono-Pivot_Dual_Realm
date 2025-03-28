@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static bool pour = false; 
+    public static bool pour = false;
     public static bool _throw = false;
  
-    public static void SetThrowState(bool newState)
+    public void SetThrowState(bool newState)
     {
         _throw = newState;
     }
