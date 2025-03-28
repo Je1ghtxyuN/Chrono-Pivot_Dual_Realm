@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 311424128493029358}
   - component: {fileID: 7008635453704401668}
   - component: {fileID: 4986515519731771725}
+  - component: {fileID: 8040314561257339281}
   m_Layer: 0
   m_Name: "\u6C34\u4E95"
   m_TagString: Untagged
@@ -31,8 +32,8 @@ Transform:
   m_GameObject: {fileID: 5690941625762551762}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: -17.7, y: -1.28, z: 22.99}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -17.699, y: -0.91961, z: 22.993}
+  m_LocalScale: {x: 1.7269901, y: 1.7269901, z: 1.7269901}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -266,3 +267,20 @@ MonoBehaviour:
   m_OnDeactivate:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8040314561257339281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5690941625762551762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82231618fa3c15047b92401fb4a0bdca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  cameraA: {fileID: 0}
+  cameraB: {fileID: 0}
+  rayInteractor: {fileID: 0}
+  movementController: {fileID: 0}

@@ -9,7 +9,8 @@ using UnityEngine.XR;
 public class StarMapController : MonoBehaviour
 {
     private ShotController shotController;
-    private XRRayInteractor rightRayInteractor; // 右手柄射线组件
+    
+    public XRRayInteractor rightRayInteractor; // 右手柄射线组件
     public Transform arrow;
     private Transform aim;
     private ArrowCarController arrowCar;
@@ -18,7 +19,7 @@ public class StarMapController : MonoBehaviour
         arrowCar=FindObjectOfType<ArrowCarController>();
         aim=arrowCar.GetComponent<Transform>();
         shotController=FindObjectOfType<ShotController>();
-        rightRayInteractor = GetRayInteractor(XRNode.RightHand);
+        //rightRayInteractor = GetRayInteractor(XRNode.RightHand);
         if (rightRayInteractor == null)
         {
             Debug.LogError("Right XRRayInteractor not found in the scene!");

@@ -8,8 +8,8 @@ public class SceneSwitchOnSelectPro : MonoBehaviour
     public Transform player; // 玩家的位置（通常是 XR Origin 或 Camera）
     public TimetravelController timetravelController; // 直接拖入 TimetravelController
 
-    private XRRayInteractor rightRayInteractor; // 右手柄射线组件
-    private XRRayInteractor leftRayInteractor;  // 左手柄射线组件
+    public XRRayInteractor rightRayInteractor; // 右手柄射线组件
+    public XRRayInteractor leftRayInteractor;  // 左手柄射线组件
 
     private XRBaseInteractable interactable; // 当前物体的交互组件
 
@@ -27,8 +27,8 @@ public class SceneSwitchOnSelectPro : MonoBehaviour
         }
 
         // 获取左右手柄的射线组件
-        rightRayInteractor = GetRayInteractor(XRNode.RightHand);
-        leftRayInteractor = GetRayInteractor(XRNode.LeftHand);
+        //rightRayInteractor = GetRayInteractor(XRNode.RightHand);
+        //leftRayInteractor = GetRayInteractor(XRNode.LeftHand);
 
         if (rightRayInteractor == null)
         {

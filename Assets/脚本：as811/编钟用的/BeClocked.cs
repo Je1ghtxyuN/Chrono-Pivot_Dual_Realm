@@ -8,7 +8,7 @@ public class BeClocked : MonoBehaviour
     public bool isClocked = false; // 是否被敲钟
     private ClockController clockController; // 引用 ClockController
 
-    private XRRayInteractor rightRayInteractor; // 右手柄射线组件
+    public XRRayInteractor rightRayInteractor; // 右手柄射线组件
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class BeClocked : MonoBehaviour
         }
 
         // 获取右手柄的射线组件
-        rightRayInteractor = GetRayInteractor(XRNode.RightHand);
+        //rightRayInteractor = GetRayInteractor(XRNode.RightHand);
         if (rightRayInteractor == null)
         {
             Debug.LogError("Right XRRayInteractor not found in the scene!");
