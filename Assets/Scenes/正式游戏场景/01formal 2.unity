@@ -4539,6 +4539,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4175275973294072450, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175275973294072450, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
@@ -14489,6 +14493,10 @@ PrefabInstance:
     - target: {fileID: 6512450938885202611, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: m_Name
       value: "\u6C34\u9F99\u5934"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512450938885202611, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6512450938885202611, guid: 3e86e23a601e02448bc09fc4f89842a5, type: 3}
       propertyPath: m_TagString
