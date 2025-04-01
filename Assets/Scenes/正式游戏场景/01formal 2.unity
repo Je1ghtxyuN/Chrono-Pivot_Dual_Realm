@@ -4378,6 +4378,30 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1395859536}
+    - target: {fileID: 226833804964793446, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 226833804964793446, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 226833804964793446, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 232403803012425775, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 232403803012425775, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 232403803012425775, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 490718099266244678, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4450,6 +4474,18 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1395859536}
+    - target: {fileID: 2474982545508715870, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 2474982545508715870, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 2474982545508715870, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2704637171316210788, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: playerTransform
       value: 
@@ -4458,6 +4494,18 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1395859536}
+    - target: {fileID: 3093894951763544951, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 3093894951763544951, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 3093894951763544951, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3647264883000604389, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4466,6 +4514,42 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1339678843}
+    - target: {fileID: 4099155311770917209, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 4099155311770917209, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 4099155311770917209, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4104158117683788327, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 4104158117683788327, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 4104158117683788327, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175275973294072450, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 4175275973294072450, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 4175275973294072450, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4975879762081626560, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4482,6 +4566,30 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1395859536}
+    - target: {fileID: 5887624758901939135, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 5887624758901939135, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 5887624758901939135, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6181392605108568699, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 6181392605108568699, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 6181392605108568699, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6818988470989640712, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: playerTransform
       value: 
@@ -4494,6 +4602,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1339678843}
+    - target: {fileID: 7033046220036007128, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 7033046220036007128, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 7033046220036007128, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7236349757239172273, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: m_Camera
       value: 
@@ -4506,10 +4626,34 @@ PrefabInstance:
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1395859536}
+    - target: {fileID: 7745896055816925393, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 7745896055816925393, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 7745896055816925393, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7852233556108914857, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1339678843}
+    - target: {fileID: 8401489504736109461, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 8401489504736109461, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 4503248032022383221, guid: fe3b1cff97c334549ae4f2e2028814b4, type: 2}
+    - target: {fileID: 8401489504736109461, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9212746333522670724, guid: de599f43f954dc24a99aab43bb87369b, type: 3}
       propertyPath: playerTransform
       value: 
@@ -19021,21 +19165,25 @@ PrefabInstance:
       propertyPath: FootstepAudioSource
       value: 
       objectReference: {fileID: 1339678844}
+    - target: {fileID: 5024490362090150921, guid: ac6251041cf72b34fa148aadd22acc7f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.07
+      objectReference: {fileID: 0}
     - target: {fileID: 5069153436454885147, guid: ac6251041cf72b34fa148aadd22acc7f, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5300866282222718742, guid: ac6251041cf72b34fa148aadd22acc7f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.18
+      value: -20.18
       objectReference: {fileID: 0}
     - target: {fileID: 5300866282222718742, guid: ac6251041cf72b34fa148aadd22acc7f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.384
+      value: 15.13
       objectReference: {fileID: 0}
     - target: {fileID: 5300866282222718742, guid: ac6251041cf72b34fa148aadd22acc7f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10.33
+      value: 299.16
       objectReference: {fileID: 0}
     - target: {fileID: 5300866282222718742, guid: ac6251041cf72b34fa148aadd22acc7f, type: 3}
       propertyPath: m_LocalRotation.w
