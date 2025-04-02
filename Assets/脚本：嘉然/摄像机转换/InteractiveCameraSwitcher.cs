@@ -35,7 +35,7 @@ public class InteractiveCameraSwitcher : MonoBehaviour
         cameraB.enabled = false;
         mainCamera.depth = 0;
         cameraA.depth = 1;
-        cameraB.depth = 2;
+        cameraB.depth = 1;
     }
 
     private void OnInteract(SelectEnterEventArgs args)

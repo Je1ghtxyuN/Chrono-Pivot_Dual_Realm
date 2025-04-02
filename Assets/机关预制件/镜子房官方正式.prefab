@@ -1002,12 +1002,23 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8358839231921004201, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3795030034800132068, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: -6856638857064674548, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 3485489344175030639, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 1506949719910502205, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1151,12 +1162,23 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8358839231921004201, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3795030034800132068, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: -6856638857064674548, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 3485489344175030639, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 1506949719910502205, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1300,12 +1322,23 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8358839231921004201, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3795030034800132068, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: -6856638857064674548, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 3485489344175030639, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 1506949719910502205, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -1449,12 +1482,23 @@ PrefabInstance:
       propertyPath: m_InteractionLayers.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverExited.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6907009835039866080, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+      propertyPath: m_HoverEntered.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8358839231921004201, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -3795030034800132068, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 3485489344175030639, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: 1506949719910502205, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
+    - {fileID: -6856638857064674548, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
