@@ -5,16 +5,33 @@ using UnityEngine;
 public class ArrowCarController : MonoBehaviour
 {
     public Transform aim;
+    public Rigidbody arrow;
+    public Transform arrowsposition;
+    public Quaternion arrowsrotation = Quaternion.LookRotation(Vector3.up);
+   public bool isIn;
     private void Start()
     {
-        aim=GetComponent<Transform>();
+        
     }
     private void OnTriggerEnter(Collider other)
     {
         
-        if (other.CompareTag("åó¼ý"))
+        if (other.transform==arrowsposition.transform)
         {
-            other.transform.position= aim.position;
+            arrowsposition.position = aim.position;
+            arrowsposition.rotation = arrowsrotation;
+            arrow.velocity = new Vector3(0, 0, 0);
+            arrow.useGravity = false;
+            isIn = true;
+            Debug.Log("½øÀ´ÁË");
+        }
+    }
+    private void Update()
+    {
+        if (isIn)
+        {
+            arrowsposition.position = aim.position;
+            arrowsposition.rotation = arrowsrotation;
         }
     }
 }

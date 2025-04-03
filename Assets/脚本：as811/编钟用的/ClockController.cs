@@ -17,7 +17,7 @@ public class ClockController : MonoBehaviour
     public int nowNum = 0; // 当前敲击的正确编钟数量
     public int nowClockedNum = 0; // 当前敲击的编钟总数
 
-    private DoorController doorController;
+    public DoorController doorController;
     private AudioSource audioSource; // 用于播放音效的 AudioSource
 
     [Header("声音数据库")]
@@ -25,7 +25,7 @@ public class ClockController : MonoBehaviour
 
     private void Start()
     {
-        doorController = FindObjectOfType<DoorController>();
+       
 
         // 初始化 AudioSource
         audioSource = gameObject.AddComponent<AudioSource>();

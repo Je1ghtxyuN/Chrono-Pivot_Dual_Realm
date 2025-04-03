@@ -8,17 +8,15 @@ using UnityEngine.XR;
 
 public class StarMapController : MonoBehaviour
 {
-    private ShotController shotController;
+    public ShotController shotController;
     
     public XRRayInteractor rightRayInteractor; // 右手柄射线组件
-    public Transform arrow;
-    private Transform aim;
-    private ArrowCarController arrowCar;
+    public ArrowCarController ac;
+    public ArrowCarController arrowCar;
     private void Start()
     {
-        arrowCar=FindObjectOfType<ArrowCarController>();
-        aim=arrowCar.GetComponent<Transform>();
-        shotController=FindObjectOfType<ShotController>();
+        
+
         //rightRayInteractor = GetRayInteractor(XRNode.RightHand);
         if (rightRayInteractor == null)
         {
@@ -33,8 +31,8 @@ public class StarMapController : MonoBehaviour
         // 检查右手柄的扳机键是否按下
         bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
 
-        // 如果被右手柄射线瞄准且按下扳机键，调用 Clock() 函数
-        if (isHighlighted && isRightTriggerPressed&&arrow.position==aim.position)
+        // 如果被右手柄射线瞄准且按下扳机键，调用  函数
+        if ((isHighlighted && isRightTriggerPressed&&ac.isIn))
         {
             shotController.ArrowShot();
         }

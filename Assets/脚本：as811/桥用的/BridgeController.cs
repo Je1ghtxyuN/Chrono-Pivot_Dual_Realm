@@ -10,7 +10,7 @@ public class BridgeController : MonoBehaviour
     [Header("粒子系统设置")]
     public ParticleController particleController;
     //需要改旋转的目标角度时改这里
-    private Quaternion targetRot = Quaternion.LookRotation(Vector3.forward);
+    private Quaternion targetRot = Quaternion.LookRotation(-Vector3.forward);
     public StopController stopController;
     
     private bool isTriggered = false;

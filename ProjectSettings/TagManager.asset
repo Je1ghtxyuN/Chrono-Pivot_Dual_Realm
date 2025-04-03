@@ -29,6 +29,7 @@ TagManager:
   - Laser
   - Mirror
   - Well
+  - "\u5F29\u7BAD"
   layers:
   - Default
   - TransparentFX

@@ -7,10 +7,14 @@ public class ShotController : MonoBehaviour
 {
     public Rigidbody arrow;
     public float speed;
+    public ArrowCarController ac;
+    
    
     public void ArrowShot()
     {
-        arrow.velocity = new Vector3(0, 0, -speed);
+        ac.isIn = false;
+        arrow.useGravity = false;
+        arrow.velocity = new Vector3(0, 0, speed);
         Debug.Log("Éä¼ý");
     }
     

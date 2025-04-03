@@ -5,9 +5,10 @@ using UnityEngine;
 public class TestShot : MonoBehaviour
 {
     public ShotController sc;
+    public ArrowCarController ac;
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(ac.isIn==true)
         {
             sc.ArrowShot();
             Debug.Log("按下了空格键");
