@@ -10,7 +10,7 @@ public class SimpleMirror : MonoBehaviour
     void Start()
     {
         originalRotation = transform.eulerAngles;
-        GetComponent<XRSimpleInteractable>().selectEntered.AddListener(_ => Rotate());
+        GetComponent<XRSimpleInteractable>().activated.AddListener(_ => Rotate());
     }
 
     public void Rotate()
