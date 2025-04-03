@@ -258,8 +258,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 3636729890109332178, guid: 0fb199bd850c7c9478894142009331d0, type: 3}
-  interactionDistance: 2
-  targetSceneName: 01
+  timetravelController: {fileID: 0}
+  rightRayInteractor: {fileID: 0}
+  leftRayInteractor: {fileID: 0}
 --- !u!135 &820051258706366155
 SphereCollider:
   m_ObjectHideFlags: 0
