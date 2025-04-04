@@ -12,9 +12,7 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
 
     private bool isGrabbing = false;
     private bool isRotatingForward = false; // 是否正在正向旋转
-    private XRSimpleInteractable parentInteractable; // 父物体的交互组件
 
-    private XRRayInteractor rayInteractor; // 射线组件
     [Header("被滴穿的物体")]
     public DisAppearController disAppearController; // 水滴穿过后消失的物体
 
@@ -26,20 +24,6 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
             particleEffect.Stop();
         }
 
-        // 获取父物体的 XRSimpleInteractable 组件
-        parentInteractable = transform.parent?.GetComponent<XRSimpleInteractable>();
-        if (parentInteractable == null)
-        {
-            Debug.LogError("Parent XRSimpleInteractable component not found on this object!");
-        }
-
-        // 获取射线组件
-        rayInteractor = FindObjectOfType<XRRayInteractor>();
-        if (rayInteractor == null)
-        {
-            Debug.LogError("XRRayInteractor not found in the scene!");
-        }
-
         // 确保 Animator 已正确设置
         if (animator == null)
         {
@@ -49,7 +33,9 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
                 Debug.LogError("Animator not found on the object!");
             }
         }
+
         disAppearController = FindObjectOfType<DisAppearController>();
+
         // 订阅场景加载事件
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -62,26 +48,17 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
 
     void Update()
     {
-        // 检查父物体是否被高亮（即是否被射线选中）
-        bool isParentHighlighted = parentInteractable != null && parentInteractable.isHovered;
-
-        // 如果父物体被高亮，输出调试信息
-        if (isParentHighlighted)
-        {
-            Debug.LogWarning("父物体被高亮，射线选中。");
-        }
-
         // 持续检测左手柄的 grip 按键
         if (InputDevices.GetDeviceAtXRNode(XRNode.LeftHand).TryGetFeatureValue(CommonUsages.grip, out float leftGripValue) && leftGripValue > 0.5f)
         {
             Debug.LogWarning("左手柄抓握键按下。");
-            HandleGrab(isParentHighlighted);
+            HandleGrab();
         }
         // 持续检测右手柄的 grip 按键
         else if (InputDevices.GetDeviceAtXRNode(XRNode.RightHand).TryGetFeatureValue(CommonUsages.grip, out float rightGripValue) && rightGripValue > 0.5f)
         {
             Debug.LogWarning("右手柄抓握键按下。");
-            HandleGrab(isParentHighlighted);
+            HandleGrab();
         }
         else
         {
@@ -89,9 +66,9 @@ public class ShuiLongTouInteractionSimplified : MonoBehaviour
         }
     }
 
-    private void HandleGrab(bool isParentHighlighted)
+    private void HandleGrab()
     {
-        if (!isGrabbing && isParentHighlighted)
+        if (!isGrabbing)
         {
             isGrabbing = true;
 

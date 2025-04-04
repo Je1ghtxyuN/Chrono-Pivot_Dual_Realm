@@ -17,6 +17,7 @@ public class TextPopup : MonoBehaviour
     public Transform playerTransform; // 玩家的Transform
 
     private Coroutine displayCoroutine;
+    private bool hasBeenTriggered = false; // 新增：标记是否已被触发过
 
     void Start()
     {
@@ -35,8 +36,7 @@ public class TextPopup : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-            if (true) // 待定
+        if (other.CompareTag("Player") && !hasBeenTriggered) // 修改：检查是否已被触发
         {
             StartDisplay();
             Debug.Log("Player entered the trigger");
@@ -45,8 +45,11 @@ public class TextPopup : MonoBehaviour
 
     public void StartDisplay()
     {
+        if (hasBeenTriggered) return; // 新增：如果已经触发过则直接返回
+
         if (displayCoroutine != null) StopCoroutine(displayCoroutine);
         displayCoroutine = StartCoroutine(DisplayText());
+        hasBeenTriggered = true; // 新增：标记为已触发
         Debug.Log("编钟答案显示");
     }
 
@@ -68,5 +71,11 @@ public class TextPopup : MonoBehaviour
 
         // 淡出
         uiText.gameObject.SetActive(false);
+    }
+
+    // 新增：重置触发状态的方法（如果需要）
+    public void ResetTrigger()
+    {
+        hasBeenTriggered = false;
     }
 }
