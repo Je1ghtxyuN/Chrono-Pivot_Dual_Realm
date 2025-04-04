@@ -9,51 +9,66 @@ using UnityEngine.XR;
 public class StarMapController : MonoBehaviour
 {
     public ShotController shotController;
-    
     public XRRayInteractor rightRayInteractor; // 右手柄射线组件
     public ArrowCarController ac;
     public ArrowCarController arrowCar;
+
+    private XRBaseInteractable interactable; // 当前物体的交互组件
+
+    private bool isInteractionBlocked = false; // 是否禁止交互
+    private float interactionBlockTimer = 0f; // 禁止交互的计时器
+    private const float interactionBlockDuration = 0.5f; // 禁止交互的时间（0.5秒）
+
     private void Start()
     {
-        
+        // 获取当前物体的 XRBaseInteractable 组件
+        interactable = GetComponent<XRBaseInteractable>();
+        if (interactable == null)
+        {
+            Debug.LogError("XRBaseInteractable component not found on this object!");
+        }
 
-        //rightRayInteractor = GetRayInteractor(XRNode.RightHand);
         if (rightRayInteractor == null)
         {
             Debug.LogError("Right XRRayInteractor not found in the scene!");
         }
     }
+
     private void Update()
     {
-        // 检查是否被右手柄射线瞄准
-        bool isHighlighted = IsHighlighted();
+        // 如果禁止交互，更新计时器
+        if (isInteractionBlocked)
+        {
+            interactionBlockTimer -= Time.deltaTime;
+            if (interactionBlockTimer <= 0f)
+            {
+                isInteractionBlocked = false; // 计时器结束，允许交互
+                Debug.LogWarning("禁止交互已解除，可以再次交互。");
+            }
+        }
+
+        // 检查物体是否被高亮（即是否被射线选中）
+        bool isHighlighted = interactable.isHovered;
 
         // 检查右手柄的扳机键是否按下
         bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
 
-        // 如果被右手柄射线瞄准且按下扳机键，调用  函数
-        if ((isHighlighted && isRightTriggerPressed&&ac.isIn))
+        // 如果满足所有条件且未禁止交互，调用 ArrowShot 方法
+        if (isHighlighted && isRightTriggerPressed && ac.isIn && !isInteractionBlocked)
         {
+            Debug.LogWarning("条件满足，正在发射箭头...");
+
+            // 调用射击方法
             shotController.ArrowShot();
+
+            // 交互后禁止再次交互
+            isInteractionBlocked = true;
+            interactionBlockTimer = interactionBlockDuration;
+            Debug.LogWarning("发射成功，0.5秒内禁止再次发射。");
         }
     }
 
-    // 检查是否被右手柄射线瞄准
-    private bool IsHighlighted()
-    {
-        // 检查右手柄射线是否瞄准当前物体
-        if (rightRayInteractor != null && rightRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit rightHit))
-        {
-            if (rightHit.collider != null && rightHit.collider.gameObject == gameObject)
-            {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    // 检查右手柄的扳机键是否按下
+    // 检查手柄的扳机键是否按下
     private bool IsTriggerPressed(XRNode handNode)
     {
         var devices = new List<InputDevice>();
@@ -66,19 +81,5 @@ public class StarMapController : MonoBehaviour
             }
         }
         return false;
-    }
-
-    // 获取指定手柄的射线组件
-    private XRRayInteractor GetRayInteractor(XRNode handNode)
-    {
-        XRRayInteractor[] rayInteractors = FindObjectsOfType<XRRayInteractor>();
-        foreach (XRRayInteractor rayInteractor in rayInteractors)
-        {
-            if (rayInteractor.gameObject.name.Contains(handNode == XRNode.RightHand ? "Right" : "Left"))
-            {
-                return rayInteractor;
-            }
-        }
-        return null;
     }
 }
