@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DisAppearController : MonoBehaviour
 {
+
    public void DisAppear()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
