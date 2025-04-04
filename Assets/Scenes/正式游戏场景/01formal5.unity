@@ -19265,6 +19265,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u6865\u6881\u7EC4\u5408 Variant"
       objectReference: {fileID: 0}
+    - target: {fileID: 7469215378849049486, guid: f45db8ace729d9f408408467616c3b37, type: 3}
+      propertyPath: arrowsposition
+      value: 
+      objectReference: {fileID: 1270192347}
     - target: {fileID: 8793192589000181934, guid: f45db8ace729d9f408408467616c3b37, type: 3}
       propertyPath: m_UseGravity
       value: 1
