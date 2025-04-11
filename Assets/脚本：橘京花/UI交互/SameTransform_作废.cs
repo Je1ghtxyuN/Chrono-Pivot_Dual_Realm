@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SameTransform : MonoBehaviour
+public class SameTransform_作废 : MonoBehaviour
 {
     public string playerObjectName = "Player"; // 玩家物体的名称
     public string uiControllerObjectName = "UIController"; // UI控制器物体的名称

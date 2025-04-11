@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.XR;
 
-public class ToggleObjectsWithMenuButton : MonoBehaviour
+public class ToggleObjectsWithMenuButton_作废 : MonoBehaviour
 {
     public GameObject objectToActivate; // 需要激活的物体
     public GameObject objectToDeactivate; // 需要停止激活的物体

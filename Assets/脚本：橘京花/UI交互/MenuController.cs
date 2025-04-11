@@ -5,12 +5,11 @@ using System.Collections.Generic;
 public class MenuController : MonoBehaviour
 {
     public List<GameObject> menuCanvases; // 引用多个UI菜单Canvas
-    public Transform cameraTransform; // 引用玩家的摄像头
-    public float distanceFromCamera = 2.0f; // 菜单与摄像头的距离
 
     private bool isMenuVisible = false;
     private InputDevice rightHandDevice;
     private bool wasMenuButtonPressed = false; // 跟踪上一帧的按钮状态
+    private bool wasEscapeKeyPressed = false; // 跟踪上一帧的ESC键状态
 
     void Start()
     {
@@ -37,11 +36,13 @@ public class MenuController : MonoBehaviour
             wasMenuButtonPressed = isMenuButtonPressed;
         }
 
-        // 如果菜单可见，更新位置
-        if (isMenuVisible)
+        // 检测键盘ESC键状态变化（用于调试）
+        bool isEscapeKeyPressed = Input.GetKey(KeyCode.Escape);
+        if (isEscapeKeyPressed && !wasEscapeKeyPressed)
         {
-            PositionAllCanvasesInFrontOfCamera();
+            ToggleMenu();
         }
+        wasEscapeKeyPressed = isEscapeKeyPressed;
     }
 
     private void InitializeRightHandDevice()
@@ -73,19 +74,6 @@ public class MenuController : MonoBehaviour
             if (canvas != null)
             {
                 canvas.SetActive(isActive);
-            }
-        }
-    }
-
-    void PositionAllCanvasesInFrontOfCamera()
-    {
-        foreach (var canvas in menuCanvases)
-        {
-            if (canvas != null)
-            {
-                canvas.transform.position = cameraTransform.position + cameraTransform.forward * distanceFromCamera;
-                canvas.transform.LookAt(cameraTransform);
-                canvas.transform.rotation = Quaternion.LookRotation(canvas.transform.position - cameraTransform.position);
             }
         }
     }
