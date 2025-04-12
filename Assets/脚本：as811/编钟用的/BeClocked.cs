@@ -1,103 +1,142 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(Collider))]
 public class BeClocked : MonoBehaviour
 {
-    public bool isClocked = false; // 是否被敲钟
-    private ClockController clockController; // 引用 ClockController
+    public bool isClocked = false;
+    private ClockController clockController;
 
-    public XRRayInteractor rightRayInteractor; // 右手柄射线组件
+    [Header("交互设置")]
+    public float cooldownTime = 3f;
+    public float minHitVelocity = 0.3f;
+    private float lastClockTime = -999f;
+
+    [Header("锤子设置")]
+    public string hammerTag = "Hammer";
+    private Collider hammerCollider;
+    private XRGrabInteractable grabInteractable;
+    private Rigidbody hammerRigidbody;
 
     private void Start()
     {
-        // 获取 ClockController
         clockController = FindObjectOfType<ClockController>();
         if (clockController == null)
         {
-            Debug.LogError("ClockController not found in the scene!");
+            Debug.LogError("ClockController not found!");
         }
 
-        // 获取右手柄的射线组件
-        //rightRayInteractor = GetRayInteractor(XRNode.RightHand);
-        if (rightRayInteractor == null)
-        {
-            Debug.LogError("Right XRRayInteractor not found in the scene!");
-        }
+        InitializeHammer();
     }
 
-    private void Update()
+    private void InitializeHammer()
     {
-        // 检查是否被右手柄射线瞄准
-        bool isHighlighted = IsHighlighted();
-
-        // 检查右手柄的扳机键是否按下
-        bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
-
-        // 如果被右手柄射线瞄准且按下扳机键，调用 Clock() 函数
-        if (isHighlighted && isRightTriggerPressed)
+        GameObject hammer = GameObject.FindGameObjectWithTag(hammerTag);
+        if (hammer == null)
         {
-            Clock();
-        }
-    }
-
-    // 检查是否被右手柄射线瞄准
-    private bool IsHighlighted()
-    {
-        // 检查右手柄射线是否瞄准当前物体
-        if (rightRayInteractor != null && rightRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit rightHit))
-        {
-            if (rightHit.collider != null && rightHit.collider.gameObject == gameObject)
-            {
-                return true;
-            }
+            Debug.LogError($"Hammer with tag '{hammerTag}' not found!");
+            return;
         }
 
-        return false;
+        hammerCollider = hammer.GetComponent<Collider>();
+        grabInteractable = hammer.GetComponent<XRGrabInteractable>();
+        hammerRigidbody = hammer.GetComponent<Rigidbody>();
+
+        if (hammerCollider == null) Debug.LogError("Hammer collider missing!");
+        if (grabInteractable == null) Debug.LogError("XRGrabInteractable component missing!");
+
+        // 强制配置抓取交互设置
+        ConfigureGrabInteractable();
     }
 
-    // 检查右手柄的扳机键是否按下
-    private bool IsTriggerPressed(XRNode handNode)
+    private void ConfigureGrabInteractable()
     {
-        var devices = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(handNode, devices);
-        if (devices.Count > 0)
+        // 确保有刚体组件
+        if (hammerRigidbody == null)
         {
-            if (devices[0].TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
-            {
-                return triggerValue;
-            }
+            hammerRigidbody = grabInteractable.gameObject.AddComponent<Rigidbody>();
         }
-        return false;
-    }
 
-    // 获取指定手柄的射线组件
-    private XRRayInteractor GetRayInteractor(XRNode handNode)
-    {
-        XRRayInteractor[] rayInteractors = FindObjectsOfType<XRRayInteractor>();
-        foreach (XRRayInteractor rayInteractor in rayInteractors)
+        // 关键物理设置
+        hammerRigidbody.isKinematic = false;
+        hammerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+
+        // 强制启用所有碰撞体
+        foreach (var collider in grabInteractable.GetComponentsInChildren<Collider>())
         {
-            if (rayInteractor.gameObject.name.Contains(handNode == XRNode.RightHand ? "Right" : "Left"))
-            {
-                return rayInteractor;
-            }
+            collider.enabled = true;
         }
-        return null;
+
+        // 事件监听
+        grabInteractable.selectEntered.AddListener(OnGrabbed);
+        grabInteractable.selectExited.AddListener(OnReleased);
     }
 
-    // 敲钟逻辑
-    public void Clock()
+    private void OnGrabbed(SelectEnterEventArgs args)
     {
-        isClocked = true;
-        Debug.Log("碰到了");
+        // 抓取时确保碰撞体激活
+        foreach (var collider in grabInteractable.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = true;
+        }
 
-        // 调用 ClockController 的 PlayOnce 方法，传入当前编钟对象
-        clockController.PlayOnce(this);
+        // 确保物理参数正确
+        hammerRigidbody.isKinematic = false;
+        hammerRigidbody.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
-    //调试用
+
+    private void OnReleased(SelectExitEventArgs args)
+    {
+        // 释放时不需要特殊处理
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        Clock();
+        if (IsValidHit(collision))
+        {
+            Clock(collision.relativeVelocity);
+        }
+    }
+
+    private bool IsValidHit(Collision collision)
+    {
+        return collision.collider == hammerCollider &&
+               Time.time - lastClockTime >= cooldownTime &&
+               collision.relativeVelocity.magnitude >= minHitVelocity;
+    }
+
+    public void Clock(Vector3 hitVelocity)
+    {
+        lastClockTime = Time.time;
+        isClocked = true;
+        Debug.Log($"编钟被敲击: {gameObject.name}, 速度: {hitVelocity.magnitude:F1}m/s");
+
+        clockController?.PlayOnce(this);
+        Invoke(nameof(ResetClockState), 0.1f);
+    }
+
+    private void ResetClockState()
+    {
+        isClocked = false;
+    }
+
+    private void OnGUI()
+    {
+        float remainingCooldown = Mathf.Max(0, cooldownTime - (Time.time - lastClockTime));
+        if (remainingCooldown > 0)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            GUI.Label(new Rect(screenPos.x - 50, Screen.height - screenPos.y, 100, 30),
+                     $"冷却: {remainingCooldown:F1}s");
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnGrabbed);
+            grabInteractable.selectExited.RemoveListener(OnReleased);
+        }
     }
 }

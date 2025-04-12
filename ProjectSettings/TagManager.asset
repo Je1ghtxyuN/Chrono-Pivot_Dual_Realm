@@ -30,6 +30,7 @@ TagManager:
   - Mirror
   - Well
   - "\u5F29\u7BAD"
+  - Hammer
   layers:
   - Default
   - TransparentFX
