@@ -14,6 +14,10 @@ public class UISceneSwitcher : MonoBehaviour
 
     [Header("输入设置")]
     [SerializeField] private bool enableMouseInput = true; // 是否启用鼠标输入
+    [SerializeField] private bool debugMouseInput = true; // 是否输出鼠标调试信息
+
+    // 用于跟踪上次鼠标悬停的对象
+    private GameObject lastHoveredObject = null;
 
     void Update()
     {
@@ -61,20 +65,54 @@ public class UISceneSwitcher : MonoBehaviour
     // 检测鼠标输入
     private void CheckMouseInput()
     {
+        // 创建指针事件数据
+        PointerEventData pointerData = new PointerEventData(EventSystem.current);
+        pointerData.position = Input.mousePosition;
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        // 鼠标悬停检测
+        if (results.Count > 0)
+        {
+            GameObject currentHoveredObject = results[0].gameObject;
+
+            // 如果悬停对象发生变化
+            if (currentHoveredObject != lastHoveredObject)
+            {
+                if (debugMouseInput)
+                {
+                    Debug.Log($"鼠标悬停在: {currentHoveredObject.name}", currentHoveredObject);
+                }
+                lastHoveredObject = currentHoveredObject;
+            }
+        }
+        else if (lastHoveredObject != null)
+        {
+            if (debugMouseInput)
+            {
+                Debug.Log("鼠标离开UI元素", lastHoveredObject);
+            }
+            lastHoveredObject = null;
+        }
+
         // 检测鼠标左键点击
         if (Input.GetMouseButtonDown(0))
         {
-            // 检查是否点击了这个按钮
-            PointerEventData pointerData = new PointerEventData(EventSystem.current);
-            pointerData.position = Input.mousePosition;
-
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerData, results);
+            if (debugMouseInput)
+            {
+                Debug.Log("鼠标左键按下");
+            }
 
             if (results.Count > 0)
             {
                 // 只处理最顶层的UI元素
                 GameObject clickedObject = results[0].gameObject;
+
+                if (debugMouseInput)
+                {
+                    Debug.Log($"尝试点击: {clickedObject.name}", clickedObject);
+                }
 
                 // 检查点击的是否是这个按钮
                 if (clickedObject == gameObject || clickedObject.transform.IsChildOf(transform))
@@ -82,10 +120,26 @@ public class UISceneSwitcher : MonoBehaviour
                     Button button = GetComponent<Button>();
                     if (button != null && button.interactable)
                     {
+                        if (debugMouseInput)
+                        {
+                            Debug.Log($"成功点击按钮: {gameObject.name}, 加载场景: {sceneToLoad}", gameObject);
+                        }
                         // 切换场景
                         SceneManager.LoadScene(sceneToLoad);
                     }
+                    else if (debugMouseInput)
+                    {
+                        Debug.Log($"找到按钮但不可交互: {gameObject.name}", gameObject);
+                    }
                 }
+                else if (debugMouseInput)
+                {
+                    Debug.Log($"点击的不是目标按钮: {clickedObject.name}", clickedObject);
+                }
+            }
+            else if (debugMouseInput)
+            {
+                Debug.Log("鼠标点击但没有命中任何UI元素");
             }
         }
     }
