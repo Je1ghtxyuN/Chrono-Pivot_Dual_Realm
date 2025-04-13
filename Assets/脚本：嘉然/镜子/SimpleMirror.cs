@@ -1,26 +1,56 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(XRSimpleInteractable))]
 public class SimpleMirror : MonoBehaviour
 {
+    [Header("Rotation Settings")]
     [SerializeField] float rotateAngle = 45f;
-    public bool isRotated = false;
-    private Vector3 originalRotation;
+    [SerializeField] float rotationSpeed = 90f;
+    [SerializeField] float cooldown = 0.3f;
+
+    private bool isRotated = false;
+    private Quaternion originalRotation;
+    private Quaternion targetRotation;
+    private float lastRotateTime;
 
     void Start()
     {
-        originalRotation = transform.eulerAngles;
+        originalRotation = transform.rotation;
+        targetRotation = originalRotation;
         GetComponent<XRSimpleInteractable>().activated.AddListener(_ => Rotate());
+    }
+
+    void Update()
+    {
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            targetRotation,
+            rotationSpeed * Time.deltaTime
+        );
     }
 
     public void Rotate()
     {
-        float targetY = isRotated ? originalRotation.y : originalRotation.y + rotateAngle;
-        transform.eulerAngles = new Vector3(
-            originalRotation.x,
+        if (Time.time - lastRotateTime < cooldown) return;
+        if (Quaternion.Angle(transform.rotation, targetRotation) > 0.1f) return;
+
+        RotateLogic();
+    }
+
+    private void RotateLogic()
+    {
+        float targetY = isRotated ?
+            originalRotation.eulerAngles.y :
+            originalRotation.eulerAngles.y + rotateAngle;
+
+        targetRotation = Quaternion.Euler(
+            originalRotation.eulerAngles.x,
             targetY,
-            originalRotation.z
+            originalRotation.eulerAngles.z
         );
+
         isRotated = !isRotated;
+        lastRotateTime = Time.time;
     }
 }

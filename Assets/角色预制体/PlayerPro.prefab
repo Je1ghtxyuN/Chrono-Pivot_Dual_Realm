@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 9179517262768920162}
   - component: {fileID: 580095826840321048}
   - component: {fileID: 6928980622078225931}
+  - component: {fileID: 4778396079540210552}
   m_Layer: 0
   m_Name: Left Controller
   m_TagString: Untagged
@@ -729,6 +730,27 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 30005
   m_SortAtRoot: 0
+--- !u!114 &4778396079540210552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110175830588109238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051172b6c46076f47a1edd8288f94725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mirrorLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  maxDistance: 5
+  triggerThreshold: 0.2
+  laserMaterial: {fileID: 0}
+  activeColor: {r: 0, g: 1, b: 1, a: 1}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  interactionCooldown: 0.5
 --- !u!1 &292451420740210680
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,6 +3955,7 @@ GameObject:
   - component: {fileID: 6490642730832288116}
   - component: {fileID: 6879132523493802364}
   - component: {fileID: 8706717433128091255}
+  - component: {fileID: 207934194613893225}
   m_Layer: 0
   m_Name: Right Controller
   m_TagString: Untagged
@@ -4646,6 +4669,27 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 30005
   m_SortAtRoot: 0
+--- !u!114 &207934194613893225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3071950643760963374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 051172b6c46076f47a1edd8288f94725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mirrorLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  maxDistance: 5
+  triggerThreshold: 0.2
+  laserMaterial: {fileID: 0}
+  activeColor: {r: 0, g: 1, b: 1, a: 1}
+  inactiveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  interactionCooldown: 0.5
 --- !u!1 &3342302987828268049
 GameObject:
   m_ObjectHideFlags: 0

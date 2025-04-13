@@ -1238,19 +1238,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.523118
+      value: 0.2950484
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.517884
+      value: -0.30054218
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.49192014
+      value: 0.65466356
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.46492824
+      value: 0.62772334
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1258,7 +1258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -58.38599
+      value: -13.38599
       objectReference: {fileID: 0}
     - target: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1326,7 +1326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateAngle: 45
-  isRotated: 0
+  rotationSpeed: 90
+  cooldown: 0.3
 --- !u!4 &5037664903759621227 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
@@ -1486,7 +1487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateAngle: 45
-  isRotated: 0
+  rotationSpeed: 90
+  cooldown: 0.3
 --- !u!4 &7964911146002720337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
@@ -1646,7 +1648,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateAngle: 45
-  isRotated: 0
+  rotationSpeed: 90
+  cooldown: 0.3
 --- !u!4 &1445622480898795537 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6417720603232758737, guid: 5b61b772cbb749e42ba1dda5465de317, type: 3}
@@ -1811,4 +1814,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateAngle: 45
-  isRotated: 0
+  rotationSpeed: 90
+  cooldown: 0.3
