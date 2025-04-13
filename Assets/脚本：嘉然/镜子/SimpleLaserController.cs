@@ -1,24 +1,14 @@
+ï»¿using System.Diagnostics;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(LineRenderer))]
 public class SimpleLaserController : MonoBehaviour
 {
-    [Header("XR Settings")]
-    public XRRayInteractor rightRayInteractor; // ÓÒÊÖ±úÉäÏß×é¼þ
-    public XRRayInteractor leftRayInteractor;  // ×óÊÖ±úÉäÏß×é¼þ
+    [Header("Settings")]
 
-    [Header("Laser Settings")]
     [SerializeField] float maxDistance = 50f;
     [SerializeField] int maxBounces = 4;
     [SerializeField] float surfaceOffset = 0.01f;
-
-    [Header("Interaction Settings")]
-    private bool isInteractionBlocked = false;
-    private float interactionBlockTimer = 0f;
-    private const float interactionBlockDuration = 0.5f;
 
     [Header("Debug")]
     [SerializeField] bool showGizmos = true;
@@ -35,52 +25,9 @@ public class SimpleLaserController : MonoBehaviour
 
     void Update()
     {
-        UpdateLaserPath(); // ÎïÀí¼¤¹âÂß¼­£¨½öÓÃÓÚÌØÊâÎïÌå´¥·¢£©
-        HandleXRInput();   // ÊÖ±ú½»»¥Âß¼­£¨Ê¹ÓÃXR Ray Interactor£©
-        UpdateInteractionCooldown();
+        UpdateLaserPath();
     }
 
-    // ÊÖ±ú½»»¥Âß¼­£¨Ê¹ÓÃXR Ray Interactor£©
-    private void HandleXRInput()
-    {
-        if (isInteractionBlocked) return;
-
-        // ¼ì²éÓÒÊÖ±ú½»»¥
-        if (rightRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit rightHit))
-        {
-            HandleXRInteraction(rightHit, XRNode.RightHand);
-        }
-
-        // ¼ì²é×óÊÖ±ú½»»¥
-        if (leftRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit leftHit))
-        {
-            HandleXRInteraction(leftHit, XRNode.LeftHand);
-        }
-    }
-
-    private void HandleXRInteraction(RaycastHit hit, XRNode handNode)
-    {
-        GameObject hitObject = hit.collider.gameObject;
-
-        // Ö»´¦Àí¾µ×Ó½»»¥
-        if (hitObject.CompareTag("mirror"))
-        {
-            bool isTriggerPressed = IsTriggerPressed(handNode);
-
-            if (isTriggerPressed)
-            {
-                var mirror = hitObject.GetComponent<SimpleMirror>();
-                if (mirror != null)
-                {
-                    mirror.Rotate();
-                    isInteractionBlocked = true;
-                    interactionBlockTimer = interactionBlockDuration;
-                }
-            }
-        }
-    }
-
-    // ÎïÀí¼¤¹âÂß¼­£¨Ìí¼ÓBox Collider×èµ²¼ì²â£©
     private void UpdateLaserPath()
     {
         _line.positionCount = 1;
@@ -93,25 +40,25 @@ public class SimpleLaserController : MonoBehaviour
 
         while (bounceCount <= maxBounces)
         {
-            // ¼ì²âËùÓÐÅö×²£¨°üÀ¨Box Collider£©
+            // æ£€æµ‹æ‰€æœ‰ç¢°æ’žï¼ˆåŒ…æ‹¬Box Colliderï¼‰
             if (Physics.Raycast(currentPos, currentDir, out RaycastHit hit, maxDistance))
             {
-                // ¼ì²éÊÇ·ñÅöµ½Box Collider£¨·ÇMirror²ã£©
+                // æ£€æŸ¥æ˜¯å¦ç¢°åˆ°Box Colliderï¼ˆéžMirrorå±‚ï¼‰
                 if (hit.collider is BoxCollider && !LayerMask.LayerToName(hit.collider.gameObject.layer).Equals("Mirror"))
                 {
-                    // Èç¹ûÅöµ½Box Collider£¬¼¤¹âÔÚ´ËÖÕÖ¹
+                    // å¦‚æžœç¢°åˆ°Box Colliderï¼Œæ¿€å…‰åœ¨æ­¤ç»ˆæ­¢
                     _line.positionCount++;
                     _line.SetPosition(_line.positionCount - 1, hit.point);
                     break;
                 }
 
-                // Ö»´¦ÀíMirror²ãµÄ·´Éä
+                // åªå¤„ç†Mirrorå±‚çš„åå°„
                 if (((1 << hit.collider.gameObject.layer) & _reflectionMask) != 0)
                 {
                     _line.positionCount++;
                     _line.SetPosition(_line.positionCount - 1, hit.point);
 
-                    HandleLaserInteraction(hit);
+                    HandleMirrorInteraction(hit);
 
                     currentDir = Vector3.Reflect(currentDir, hit.normal);
                     currentPos = hit.point + currentDir * surfaceOffset;
@@ -119,7 +66,7 @@ public class SimpleLaserController : MonoBehaviour
                 }
                 else
                 {
-                    // Åöµ½·Ç·´ÉäÎïÌå£¬¼¤¹âÖÕÖ¹
+                    // ç¢°åˆ°éžåå°„ç‰©ä½“ï¼Œæ¿€å…‰ç»ˆæ­¢
                     _line.positionCount++;
                     _line.SetPosition(_line.positionCount - 1, hit.point);
                     break;
@@ -134,61 +81,39 @@ public class SimpleLaserController : MonoBehaviour
         }
     }
 
-    // ÎïÀí¼¤¹âµÄ½»»¥´¦Àí£¨½öÓÃÓÚÌØÊâTarget£©
-    private void HandleLaserInteraction(RaycastHit hit)
+    private void HandleMirrorInteraction(RaycastHit hit)
+
     {
         GameObject hitObject = hit.collider.gameObject;
 
-        if (hitObject.CompareTag("Target") && hitObject.layer == LayerMask.NameToLayer("Mirror"))
+        if (hitObject.CompareTag("Target") &&
+            hitObject.layer == LayerMask.NameToLayer("Mirror"))
         {
             if (_lastHitMirror != hitObject)
             {
-                Debug.Log("´óÂÀ£¬¹ÃÏ´£¬¼ÐÖÓ£¬»ÆÖÓ£¬ÖÙÂÀ");
                 _lastHitMirror = hitObject;
-
                 TextPopup textPopup = hitObject.GetComponent<TextPopup>();
                 if (textPopup != null)
                 {
                     textPopup.StartDisplay();
                 }
             }
+            return;
         }
-    }
-
-    // ÀäÈ´Ê±¼ä¸üÐÂ
-    private void UpdateInteractionCooldown()
-    {
-        if (isInteractionBlocked)
+        if (hitObject.CompareTag("Mirror"))
         {
-            interactionBlockTimer -= Time.deltaTime;
-            if (interactionBlockTimer <= 0f)
+            if (_lastHitMirror != hitObject)
             {
-                isInteractionBlocked = false;
+                var mirror = hitObject.GetComponent<SimpleMirror>();
+                if (mirror != null)
+                {
+                    _lastHitMirror = hitObject;
+                }
             }
         }
-    }
-
-    // °â»ú¼ü¼ì²â
-    private bool IsTriggerPressed(XRNode handNode)
-    {
-        var devices = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(handNode, devices);
-        if (devices.Count > 0)
+        else
         {
-            if (devices[0].TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
-            {
-                return triggerValue;
-            }
+            _lastHitMirror = null;
         }
-        return false;
     }
-
-#if UNITY_EDITOR
-    void OnDrawGizmos()
-    {
-        if (!showGizmos) return;
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + transform.forward * 1f);
-    }
-#endif
 }
