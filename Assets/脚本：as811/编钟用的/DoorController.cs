@@ -10,9 +10,9 @@ public class DoorController : MonoBehaviour
 {
     public bool isOpen = false;
     public Transform door;
-    public Transform target;
+    
     public float speed = 5f;
-
+    public Quaternion targetRotation;
     public void Open()
     {
         isOpen = true;
@@ -28,9 +28,9 @@ public class DoorController : MonoBehaviour
         if (isOpen)
         {
             // Œª÷√≤Â÷µ
-            door.position = Vector3.Lerp(
-            door.position,
-                target.position,
+            door.rotation = Quaternion.Slerp(
+                door.rotation,
+                targetRotation,
                 Time.deltaTime * speed
             );
 

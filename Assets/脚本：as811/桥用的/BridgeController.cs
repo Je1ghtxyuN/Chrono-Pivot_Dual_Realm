@@ -10,9 +10,14 @@ public class BridgeController : MonoBehaviour
     [Header("粒子系统设置")]
     public ParticleController particleController;
     //需要改旋转的目标角度时改这里
-    private Quaternion targetRot = Quaternion.LookRotation(-Vector3.forward);
+    [Header("桥的旋转角度设置")]
+    public Quaternion targetRot = Quaternion.LookRotation(-Vector3.forward);
+    [Header("音效")]
+    public AudioSource audioSource;
+    [Header("调用")]
     public StopController stopController;
-    
+    [Header("删除空气墙")]
+    public Transform airWall;
     private bool isTriggered = false;
     private Quaternion initialRotation;
     //保护性，防止多次触发
@@ -45,15 +50,13 @@ public class BridgeController : MonoBehaviour
             stopController.Stop();
         }
     }
-    private void Rotate()
-    {
-       
-    }
     void Update()
     {
         if (bridge.rotation == targetRot && !defend)
         {
             StartCoroutine(particleController.PlayAndStop());
+            audioSource.Play();
+            Destroy(airWall.gameObject);
             defend = true;
             isTriggered = false;
         }

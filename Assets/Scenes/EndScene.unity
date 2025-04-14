@@ -749,9 +749,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Lorem ipum \u586B\u5145\u6587\u672C\u88AB\u5E73\u9762\u8BBE\u8BA1\u5E08\u3001\u7A0B\u5E8F\u5458\u548C\u5370\u5237\u5546\u4F7F\u7528\uFF0C\u76EE\u7684\u662F\u5360\u636E\u7F51\u7AD9\u3001\u5E7F\u544A\u4EA7\u54C1\u6216\u6700\u7EC8\u6587\u672C\u5C1A\u672A\u51C6\u5907\u597D\u7684\u7F16\u8F91\u5236\u4F5C\u7684\u7A7A\u95F4\u3002\r\n\r\n\u8FD9\u79CD\u6743\u5B9C\u4E4B\u8BA1\u6709\u52A9\u4E8E\u4E86\u89E3\u5373\u5C06\u901A\u8FC7\u6570\u5B57\u6E20\u9053\u5370\u5237\u6216\u4F20\u64AD\u7684\u6210\u54C1\u3002\r\n\r\n\u4E3A\u4E86\u5F97\u5230\u66F4\u7B26\u5408\u6700\u7EC8\u7ED3\u679C\u7684\u7ED3\u679C\uFF0C\u5E73\u9762\u8BBE\u8BA1\u5E08\u3001\u8BBE\u8BA1\u5E08\u6216\u5370\u5237\u5E08\u62A5\u544A
-    Lorem ipsum \u6587\u672C\u7684\u4E24\u4E2A\u57FA\u672C\u65B9\u9762\uFF0C\u5373\u53EF\u8BFB\u6027\u548C\u7F16\u8F91\u8981\u6C42\u3002\r\n\r\n\u590D\u5236
-    Lorem ipsum \u7684\u5B57\u4F53\u548C\u5B57\u4F53\u5927\u5C0F\u7684\u9009\u62E9\u662F\u5BF9\u8D85\u8D8A\u7B80\u5355\u548C\u7B80\u5355\u586B\u5145\u7A7A\u95F4\uFF0C\u4E13\u95E8\u7528\u4E8E\u63A5\u53D7\u771F\u5B9E\u6587\u672C\u5E76\u5141\u8BB8\u624B\u62FF\u5E7F\u544A/\u51FA\u7248\u4EA7\u54C1\uFF0C\u7F51\u7EDC\u548C\u7EB8\uFF0C\u771F\u5B9E\u7684\u73B0\u5B9E\u3002\r\n\r\n\u5B83\u7684\u5E9F\u8BDD\u8BA9\u773C\u775B\u53EA\u5173\u6CE8\u56FE\u5F62\u5E03\u5C40\u5BA2\u89C2\u5730\u8BC4\u4F30\u51B3\u5B9A\u4E86\u4E00\u4E2A\u9879\u76EE\u7684\u98CE\u683C\u9009\u62E9\uFF0C\u6240\u4EE5\u5B83\u88AB\u5B89\u88C5\u5728\u8BB8\u591A\u201C\u4E2A\u4EBA\u51FA\u7248\u201D\u548C\u201C\u5185\u5BB9\u7BA1\u7406\u7CFB\u7EDF\u201D\u8F6F\u4EF6\u5E73\u53F0\u4E0A\u7684\u8BB8\u591A\u56FE\u5F62\u7A0B\u5E8F\u4E2D\u3002"
+  m_text: "                                                                 \u6677\u67A2\u53CC\u754C\n\n\n\n\u5236\u4F5C\u961F\u4F0D\uFF1A                            
+    Virtuoso Nexus\n\n                                                                   
+    \u8D75\u6893\u7A0B\n\n                                                                   
+    \u90ED\u6600\u5764\n\n                                                                      
+    \u9EC4\u653F\n\n                                                                   
+    \u5218\u5B87\u5E06\n\n                                                                   
+    \u5F20\u9053\u822A\n\n                                                          
+    \u611F\u8C22\u60A8\u7684\u6E38\u73A9\uFF01\n\n\n\n\n                                                                                             
+    ....\u6B32\u77E5\u540E\u4E8B\u5982\u4F55\uFF0C                                    
+    \n                                                                                                            
+    \u4E14\u542C\u4E0B\u56DE\u5206\u89E3\u3002\n                 \n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fed52aba92ddc6141b32aa33546a00bf, type: 2}
   m_sharedMaterial: {fileID: 5436052142645192324, guid: fed52aba92ddc6141b32aa33546a00bf, type: 2}
@@ -1233,7 +1241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 2135802892}
   textposition: {fileID: 2135802890}
-  speed: 10
+  speed: 5
 --- !u!65 &1941515415
 BoxCollider:
   m_ObjectHideFlags: 0

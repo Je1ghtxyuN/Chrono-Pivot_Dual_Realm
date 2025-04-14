@@ -17,13 +17,22 @@ public class BIGDoorController : MonoBehaviour
 
     private bool isTriggered = false;
     private bool isDoorOpen = false;
+    private bool nowInPlace = false;
+    private Quaternion initialDoorRotation;
     private Vector3 initialPosition;
+    [Header("音效")]
+    public AudioSource audioSource;
     //private Quaternion initialRotation;
     //[Header("钥匙旋转")]
     //public Quaternion targetRot = Quaternion.LookRotation(-Vector3.forward);
     [Header("门旋转")]
     public Quaternion targetRotDoor1 = Quaternion.LookRotation(-Vector3.up);
     public Quaternion targetRotDoor2 = Quaternion.LookRotation(-Vector3.up);
+    private void Start()
+    {
+        initialDoorRotation = door1.rotation;
+       
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.transform == key)
@@ -70,6 +79,10 @@ public class BIGDoorController : MonoBehaviour
                targetRotDoor2,
                Time.deltaTime * rotateSpeed
            );
+        }
+        if (key.position==targetPosition.position&&door1.rotation==initialDoorRotation)
+        {
+            audioSource.Play();
         }
 
     }

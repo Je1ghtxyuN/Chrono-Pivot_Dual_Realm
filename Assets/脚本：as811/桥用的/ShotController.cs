@@ -8,13 +8,15 @@ public class ShotController : MonoBehaviour
     public Rigidbody arrow;
     public float speed;
     public ArrowCarController ac;
-    
+    public AudioSource audioSource;
+
    
     public void ArrowShot()
     {
         ac.isIn = false;
         arrow.useGravity = false;
         arrow.velocity = new Vector3(0, 0, speed);
+        audioSource.Play();
         Debug.Log("Éä¼ý");
     }
     

@@ -9,7 +9,7 @@ public class EndController : MonoBehaviour
     [Header("文字内容")]
     [TextArea] public string displayText = "你好，冒险者！";
     [Header("显示设置")]
-    public float charDelay = 0.1f; // 字符间隔
+    public float charDelay = 0.3f; // 字符间隔
     public float displayDuration = 3f; // 显示总时长
     [Header("场景设置")]
     public Transform keyItem;
