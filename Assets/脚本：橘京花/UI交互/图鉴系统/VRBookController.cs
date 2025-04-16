@@ -24,8 +24,15 @@ public class VRBookController : MonoBehaviour
     [SerializeField] private bool enableMouseInput = true;
     [SerializeField] private bool showDebugLogs = true;
 
+    [Header("交互冷却时间")]
+    [SerializeField] private float interactionCooldown = 0.5f; // 按钮交互后的冷却时间（秒）
+
     // 用于跟踪上次鼠标悬停的对象
     private GameObject lastHoveredObject = null;
+    // 用于跟踪上次交互时间
+    private float lastInteractionTime = -1f;
+    // 标记当前是否在冷却中
+    private bool isInCooldown = false;
 
     void Start()
     {
@@ -48,6 +55,13 @@ public class VRBookController : MonoBehaviour
 
     void Update()
     {
+        // 检查冷却状态
+        if (isInCooldown && Time.time - lastInteractionTime >= interactionCooldown)
+        {
+            isInCooldown = false;
+            SetButtonsInteractable(true);
+        }
+
         // VR手柄输入检测
         CheckVRInput();
 
@@ -60,8 +74,11 @@ public class VRBookController : MonoBehaviour
 
     public void GoToNextPage()
     {
+        if (isInCooldown) return;
+
         if (currentPageIndex < bookPages.Count - 1)
         {
+            StartCooldown();
             currentPageIndex++;
             if (showDebugLogs) Debug.Log($"切换到下一页，当前页索引: {currentPageIndex}");
             ShowCurrentPage();
@@ -74,8 +91,11 @@ public class VRBookController : MonoBehaviour
 
     public void GoToPrevPage()
     {
+        if (isInCooldown) return;
+
         if (currentPageIndex > 0)
         {
+            StartCooldown();
             currentPageIndex--;
             if (showDebugLogs) Debug.Log($"切换到上一页，当前页索引: {currentPageIndex}");
             ShowCurrentPage();
@@ -88,6 +108,8 @@ public class VRBookController : MonoBehaviour
 
     public void ExitBook()
     {
+        if (isInCooldown) return;
+
         if (showDebugLogs) Debug.Log("正在退出书本...");
         gameObject.SetActive(false);
     }
@@ -104,6 +126,22 @@ public class VRBookController : MonoBehaviour
                 Debug.Log($"显示页面: {bookPages[i].name}");
             }
         }
+    }
+
+    // 开始冷却
+    private void StartCooldown()
+    {
+        lastInteractionTime = Time.time;
+        isInCooldown = true;
+        SetButtonsInteractable(false);
+    }
+
+    // 设置所有按钮的可交互状态
+    private void SetButtonsInteractable(bool interactable)
+    {
+        if (nextPageButton != null) nextPageButton.interactable = interactable;
+        if (prevPageButton != null) prevPageButton.interactable = interactable;
+        if (exitButton != null) exitButton.interactable = interactable;
     }
 
     // 检测XR是否启用
@@ -124,6 +162,9 @@ public class VRBookController : MonoBehaviour
     // 检测VR手柄输入
     private void CheckVRInput()
     {
+        // 如果在冷却中，不处理输入
+        if (isInCooldown) return;
+
         // 检测右手柄的扳机键是否按下
         bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
 
@@ -140,6 +181,9 @@ public class VRBookController : MonoBehaviour
     // 检测鼠标输入
     private void CheckMouseInput()
     {
+        // 如果在冷却中，不处理输入
+        if (isInCooldown) return;
+
         // 创建指针事件数据
         PointerEventData pointerData = new PointerEventData(EventSystem.current);
         pointerData.position = Input.mousePosition;
