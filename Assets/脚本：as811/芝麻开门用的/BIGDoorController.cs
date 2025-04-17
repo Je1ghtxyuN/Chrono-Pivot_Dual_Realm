@@ -23,8 +23,8 @@ public class BIGDoorController : MonoBehaviour
     [Header("音效")]
     public AudioSource audioSource;
     //private Quaternion initialRotation;
-    //[Header("钥匙旋转")]
-    //public Quaternion targetRot = Quaternion.LookRotation(-Vector3.forward);
+    [Header("钥匙旋转")]
+    public Quaternion targetRot = Quaternion.LookRotation(-Vector3.forward);
     [Header("门旋转")]
     public Quaternion targetRotDoor1 = Quaternion.LookRotation(-Vector3.up);
     public Quaternion targetRotDoor2 = Quaternion.LookRotation(-Vector3.up);
@@ -56,15 +56,15 @@ public class BIGDoorController : MonoBehaviour
                 Time.deltaTime * moveSpeed
             );
 
-            //// 旋转插值
+            // 旋转插值
 
-            //key.rotation = Quaternion.Slerp(
-            //    key.rotation,
-            //    targetRot,
-            //    Time.deltaTime * rotateSpeed
-            //);
-            //keyHole.rotation = key.rotation;
-           
+            key.rotation = Quaternion.Slerp(
+                key.rotation,
+                targetRot,
+                Time.deltaTime * rotateSpeed
+            );
+            keyHole.rotation = key.rotation;
+
         }
         
         if (isDoorOpen)
