@@ -276,6 +276,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101645218}
   m_CullTransparentMesh: 1
+--- !u!1 &104872617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 104872618}
+  - component: {fileID: 104872619}
+  m_Layer: 0
+  m_Name: "\u573A\u666F\u8F6C\u6362\u6D4B\u8BD5\u811A\u672C"
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &104872618
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104872617}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -59.51405, y: 484.4868, z: 173.7708}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &104872619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104872617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1dbab995b39b1346872007100682664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &105126228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1527,7 +1571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRayInteractor: {fileID: 836316811}
   leftRayInteractor: {fileID: 1174929158}
-  showDebugLogs: 1
+  maxRaycastDistance: 100
 --- !u!114 &492014977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2061,7 +2105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRayInteractor: {fileID: 836316811}
   leftRayInteractor: {fileID: 1174929158}
-  showDebugLogs: 1
+  maxRaycastDistance: 100
 --- !u!114 &707951115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2198,8 +2242,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: rebuildStartMenu
+  loadingSkybox: {fileID: 0}
   rayInteractor: {fileID: 483239423}
   enableMouseInput: 1
+  debugMouseInput: 1
+  buttonsToDisable: []
+  loadingScreen: {fileID: 0}
+  progressBar: {fileID: 0}
+  progressText: {fileID: 0}
 --- !u!114 &784158088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2356,7 +2406,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRayInteractor: {fileID: 836316811}
   leftRayInteractor: {fileID: 1174929158}
-  showDebugLogs: 1
+  maxRaycastDistance: 100
 --- !u!114 &814667878
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3832,7 +3882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRayInteractor: {fileID: 836316811}
   leftRayInteractor: {fileID: 1174929158}
-  showDebugLogs: 1
+  maxRaycastDistance: 100
 --- !u!114 &1431782417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4046,7 +4096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRayInteractor: {fileID: 836316811}
   leftRayInteractor: {fileID: 1174929158}
-  showDebugLogs: 1
+  maxRaycastDistance: 100
 --- !u!114 &1516518045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4866,7 +4916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightRayInteractor: {fileID: 836316811}
   leftRayInteractor: {fileID: 1174929158}
-  showDebugLogs: 1
+  maxRaycastDistance: 100
 --- !u!114 &1802451655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4987,7 +5037,13 @@ MonoBehaviour:
   - {fileID: 1913134591}
   - {fileID: 926137252}
   currentPageIndex: 0
+  nextPageButton: {fileID: 0}
+  prevPageButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  rayInteractor: {fileID: 0}
+  enableMouseInput: 1
   showDebugLogs: 1
+  interactionCooldown: 0.5
 --- !u!114 &1807569613
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5466,7 +5522,13 @@ MonoBehaviour:
   - {fileID: 1866458713}
   - {fileID: 669502316}
   currentPageIndex: 0
+  nextPageButton: {fileID: 0}
+  prevPageButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  rayInteractor: {fileID: 0}
+  enableMouseInput: 1
   showDebugLogs: 1
+  interactionCooldown: 0.5
 --- !u!114 &1923872402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6047,8 +6109,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: 
+  loadingSkybox: {fileID: 0}
   rayInteractor: {fileID: 0}
   enableMouseInput: 1
+  debugMouseInput: 1
+  buttonsToDisable: []
+  loadingScreen: {fileID: 0}
+  progressBar: {fileID: 0}
+  progressText: {fileID: 0}
 --- !u!224 &645316177180895452
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8881,8 +8949,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: rebuildStartMenu
+  loadingSkybox: {fileID: 0}
   rayInteractor: {fileID: 0}
   enableMouseInput: 1
+  debugMouseInput: 1
+  buttonsToDisable: []
+  loadingScreen: {fileID: 0}
+  progressBar: {fileID: 0}
+  progressText: {fileID: 0}
 --- !u!1 &8210893869772486835
 GameObject:
   m_ObjectHideFlags: 0
@@ -9178,3 +9252,4 @@ SceneRoots:
   - {fileID: 1590998014}
   - {fileID: 105126232}
   - {fileID: 1909287631}
+  - {fileID: 104872618}

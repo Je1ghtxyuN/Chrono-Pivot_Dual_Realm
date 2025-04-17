@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/testscene.unity
     guid: 46a4b771eb83cfd45986358977e06fde
-  - enabled: 0
+  - enabled: 1
     path: "Assets/Scenes/\u5F00\u59CB\u83DC\u5355/rebuildStartMenu.unity"
     guid: ed8e758f7d620ef448b838d2a5adb9ff
   - enabled: 0

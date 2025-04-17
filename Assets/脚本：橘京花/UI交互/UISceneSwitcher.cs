@@ -51,23 +51,34 @@ public class UISceneSwitcher : MonoBehaviour
         // 检查场景是否存在
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
-            bool sceneExists = false;
-            for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
-            {
-                string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
-                if (System.IO.Path.GetFileNameWithoutExtension(scenePath) == sceneToLoad)
-                {
-                    sceneExists = true;
-                    break;
-                }
-            }
-            Debug.Log(sceneExists ? $"[UISceneSwitcher] 场景 '{sceneToLoad}' 存在于Build Settings" :
-                                  $"[UISceneSwitcher] 警告: 场景 '{sceneToLoad}' 不存在于Build Settings!");
+            CheckSceneExists();
         }
         else
         {
             Debug.LogWarning("[UISceneSwitcher] 警告: sceneToLoad 未设置!");
         }
+    }
+
+    // 检查场景是否存在
+    private void CheckSceneExists()
+    {
+        bool sceneExists = IsSceneInBuildSettings(sceneToLoad);
+        Debug.Log(sceneExists ? $"[UISceneSwitcher] 场景 '{sceneToLoad}' 存在于Build Settings" :
+                              $"[UISceneSwitcher] 警告: 场景 '{sceneToLoad}' 不存在于Build Settings!");
+    }
+
+    // 检查场景是否存在于Build Settings中
+    private bool IsSceneInBuildSettings(string sceneName)
+    {
+        for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        {
+            string scenePath = SceneUtility.GetScenePathByBuildIndex(i);
+            if (System.IO.Path.GetFileNameWithoutExtension(scenePath) == sceneName)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     void Update()
@@ -86,28 +97,19 @@ public class UISceneSwitcher : MonoBehaviour
     private bool IsXREnabled()
     {
         var xrSettings = XRGeneralSettings.Instance;
-        if (xrSettings == null)
-            return false;
+        if (xrSettings == null) return false;
 
         var xrManager = xrSettings.Manager;
-        if (xrManager == null)
-            return false;
+        if (xrManager == null) return false;
 
-        var xrLoader = xrManager.activeLoader;
-        return xrLoader != null;
+        return xrManager.activeLoader != null;
     }
 
     // 检测VR手柄输入
     private void CheckVRInput()
     {
-        // 检测右手柄的扳机键是否按下
-        bool isRightTriggerPressed = IsTriggerPressed(XRNode.RightHand);
-
-        // 检测左手柄的扳机键是否按下
-        bool isLeftTriggerPressed = IsTriggerPressed(XRNode.LeftHand);
-
         // 如果任意手柄的扳机键按下
-        if (isRightTriggerPressed || isLeftTriggerPressed)
+        if (IsTriggerPressed())
         {
             CheckUIInteraction();
         }
@@ -175,22 +177,10 @@ public class UISceneSwitcher : MonoBehaviour
                         {
                             Debug.Log($"成功点击按钮: {gameObject.name}, 加载场景: {sceneToLoad}", gameObject);
                         }
-                        // 启动异步加载场景
-                        StartCoroutine(LoadSceneAsync());
-                    }
-                    else if (debugMouseInput)
-                    {
-                        Debug.Log($"找到按钮但不可交互: {gameObject.name}", gameObject);
+                        // 启动场景切换
+                        SwitchScene();
                     }
                 }
-                else if (debugMouseInput)
-                {
-                    Debug.Log($"点击的不是目标按钮: {clickedObject.name}", clickedObject);
-                }
-            }
-            else if (debugMouseInput)
-            {
-                Debug.Log("鼠标点击但没有命中任何UI元素");
             }
         }
     }
@@ -207,11 +197,51 @@ public class UISceneSwitcher : MonoBehaviour
                 Button button = GetComponent<Button>();
                 if (button != null && button.interactable)
                 {
-                    // 启动异步加载场景
-                    StartCoroutine(LoadSceneAsync());
+                    // 启动场景切换
+                    SwitchScene();
                 }
             }
         }
+    }
+
+    // 场景切换主逻辑
+    private void SwitchScene()
+    {
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            Debug.Log($"[UISceneSwitcher] 正在尝试切换场景到: {sceneToLoad}");
+
+            // 检查场景是否存在
+            if (IsSceneInBuildSettings(sceneToLoad))
+            {
+                // 启动异步加载场景
+                StartCoroutine(LoadSceneAsync());
+            }
+            else
+            {
+                Debug.LogError($"[UISceneSwitcher] 场景加载失败: 场景 '{sceneToLoad}' 不存在于Build Settings中!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[UISceneSwitcher] 未设置要加载的场景名称!");
+        }
+    }
+
+    // 检查手柄的扳机键是否按下
+    private bool IsTriggerPressed()
+    {
+        var devices = new List<InputDevice>();
+        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Controller, devices);
+
+        foreach (var device in devices)
+        {
+            if (device.TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue) && triggerValue)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     // 异步加载场景
@@ -219,137 +249,68 @@ public class UISceneSwitcher : MonoBehaviour
     {
         Debug.Log("[UISceneSwitcher] 开始异步加载场景: " + sceneToLoad);
 
-        // ===== 1. 禁用按钮 =====
-        Debug.Log("[UISceneSwitcher] 正在禁用按钮...");
-        if (buttonsToDisable != null)
-        {
-            Debug.Log($"[UISceneSwitcher] 找到 {buttonsToDisable.Length} 个需要禁用的按钮");
-            for (int i = 0; i < buttonsToDisable.Length; i++)
-            {
-                if (buttonsToDisable[i] != null)
-                {
-                    Debug.Log($"[UISceneSwitcher] 禁用按钮: {buttonsToDisable[i].name}");
-                    buttonsToDisable[i].enabled = false;
-                }
-                else
-                {
-                    Debug.LogWarning($"[UISceneSwitcher] 警告: buttonsToDisable[{i}] 为null!");
-                }
-            }
-        }
-        else
-        {
-            Debug.LogWarning("[UISceneSwitcher] 警告: buttonsToDisable 为null");
-        }
+        // 1. 禁用按钮
+        DisableButtons();
 
-        // ===== 2. 更改天空盒 =====
-        Debug.Log("[UISceneSwitcher] 正在更改天空盒...");
+        // 2. 更改天空盒
         if (loadingSkybox != null)
         {
-            Debug.Log($"[UISceneSwitcher] 设置加载天空盒: {loadingSkybox.name}");
             RenderSettings.skybox = loadingSkybox;
             DynamicGI.UpdateEnvironment();
         }
-        else
-        {
-            Debug.LogWarning("[UISceneSwitcher] 警告: loadingSkybox 未设置，保持原天空盒");
-        }
 
-        // ===== 3. 显示加载界面 =====
-        Debug.Log("[UISceneSwitcher] 正在显示加载界面...");
+        // 3. 显示加载界面
         if (loadingScreen != null)
         {
-            Debug.Log($"[UISceneSwitcher] 激活加载界面: {loadingScreen.name}");
             loadingScreen.SetActive(true);
 
-            // ===== 4. 初始化进度条 =====
-            if (progressBar != null)
-            {
-                Debug.Log($"[UISceneSwitcher] 重置进度条: {progressBar.name}");
-                progressBar.value = 0;
-            }
-            else
-            {
-                Debug.LogWarning("[UISceneSwitcher] 警告: progressBar 未设置!");
-            }
-
-            if (progressText != null)
-            {
-                progressText.text = "0%";
-            }
-        }
-        else
-        {
-            Debug.LogWarning("[UISceneSwitcher] 警告: loadingScreen 未设置!");
-            yield break; // 终止协程
+            // 初始化进度条
+            if (progressBar != null) progressBar.value = 0;
+            if (progressText != null) progressText.text = "0%";
         }
 
-        // ===== 5. 开始异步加载 =====
-        Debug.Log($"[UISceneSwitcher] 开始加载场景: {sceneToLoad}");
+        // 4. 开始异步加载
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneToLoad);
-        if (asyncLoad == null)
-        {
-            Debug.LogWarning("[UISceneSwitcher] 警告: 场景加载失败，请检查场景名称!");
-            yield break;
-        }
-
         asyncLoad.allowSceneActivation = false;
-        Debug.Log("[UISceneSwitcher] 场景加载已开始，等待完成...");
 
-        // ===== 6. 更新进度 =====
+        // 5. 更新进度
         while (!asyncLoad.isDone)
         {
             float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f);
-            Debug.Log($"[UISceneSwitcher] 当前加载进度: {progress * 100:F1}%");
 
-            // 更新进度条
-            if (progressBar != null)
-            {
-                progressBar.value = progress;
-            }
-
-            // 更新进度文本
-            if (progressText != null)
-            {
-                progressText.text = (progress * 100).ToString("F0") + "%";
-            }
+            // 更新UI
+            if (progressBar != null) progressBar.value = progress;
+            if (progressText != null) progressText.text = (progress * 100).ToString("F0") + "%";
 
             // 加载接近完成
             if (asyncLoad.progress >= 0.9f)
             {
-                Debug.Log("[UISceneSwitcher] 场景加载接近完成(90%)");
-
                 // 恢复原始天空盒
                 if (originalSkybox != null)
                 {
-                    Debug.Log($"[UISceneSwitcher] 恢复原始天空盒: {originalSkybox.name}");
                     RenderSettings.skybox = originalSkybox;
                     DynamicGI.UpdateEnvironment();
                 }
 
-                Debug.Log("[UISceneSwitcher] 允许场景激活");
                 asyncLoad.allowSceneActivation = true;
             }
 
             yield return null;
         }
 
-        Debug.Log("[UISceneSwitcher] 场景加载完成!");
+        Debug.Log($"[UISceneSwitcher] 成功加载场景: {sceneToLoad}");
     }
 
-    // 检查手柄的扳机键是否按下
-    private bool IsTriggerPressed(XRNode handNode)
+    // 禁用按钮
+    private void DisableButtons()
     {
-        var devices = new List<InputDevice>();
-        InputDevices.GetDevicesAtXRNode(handNode, devices);
-        if (devices.Count > 0)
+        if (buttonsToDisable != null)
         {
-            if (devices[0].TryGetFeatureValue(CommonUsages.triggerButton, out bool triggerValue))
+            foreach (var canvas in buttonsToDisable)
             {
-                return triggerValue;
+                if (canvas != null) canvas.enabled = false;
             }
         }
-        return false;
     }
 
     // 编辑器验证
