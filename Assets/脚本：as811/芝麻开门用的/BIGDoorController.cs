@@ -7,6 +7,7 @@ public class BIGDoorController : MonoBehaviour
 {
     [Header("Ô¿³×£¬ÃÅ£¬Ô¿³×¿×£¬Ô¿³×¸½×ÅÄ¿±êÑ¡Ôñ")]
     public Transform key;
+    private Rigidbody keyrb;
     public Transform keyHole;
     public Transform door1, door2;
     public Transform targetPosition;
@@ -31,12 +32,13 @@ public class BIGDoorController : MonoBehaviour
     private void Start()
     {
         initialDoorRotation = door1.rotation;
-       
+        keyrb = key.GetComponent<Rigidbody>();
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.transform == key)
         {
+            keyrb.useGravity = false;
             isTriggered = true;
             initialPosition = key.position;
             //initialRotation = key.rotation;
