@@ -44,9 +44,12 @@ EditorBuildSettings:
   - enabled: 0
     path: "Assets/Scenes/\u6B63\u5F0F\u6E38\u620F\u573A\u666F/01formal7.5.unity"
     guid: 2c88bba73f032a04c86df9894345053d
-  - enabled: 1
+  - enabled: 0
     path: "Assets/Scenes/\u6B63\u5F0F\u6E38\u620F\u573A\u666F/01formal8.unity"
     guid: 93362204c548bd24bbd1af70f25c25ae
+  - enabled: 1
+    path: "Assets/Scenes/\u6B63\u5F0F\u6E38\u620F\u573A\u666F/\u6677\u67A2\u53CC\u754C\u6B63\u5F0F\u7248.unity"
+    guid: 43989e1f2ce12614a97ec4d89934f620
   m_configObjects:
     Unity.XR.PXR.Settings: {fileID: 11400000, guid: e850f92f5e0b7ff44b72ea410b417736, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 942be401e1d1e834da8326eb5c9b4eac, type: 2}
