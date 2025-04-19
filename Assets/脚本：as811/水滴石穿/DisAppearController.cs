@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class DisAppearController : MonoBehaviour
 {
-
-   public void DisAppear()
+    public Transform obj;
+    private void Start()
     {
-        Destroy(gameObject);
+        obj=GetComponent<Transform>();
+    }
+    public void DisAppear()
+    {
+        Destroy(obj.gameObject);
     }
 }

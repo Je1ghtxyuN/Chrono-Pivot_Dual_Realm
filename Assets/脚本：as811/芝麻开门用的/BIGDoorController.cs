@@ -42,6 +42,7 @@ public class BIGDoorController : MonoBehaviour
             //initialRotation = key.rotation;
             Debug.Log("Ô¿³×²å½øÈ¥ÁË");
             isDoorOpen = true;
+            audioSource.Play();
         }
     }
     
@@ -63,7 +64,7 @@ public class BIGDoorController : MonoBehaviour
                 targetRot,
                 Time.deltaTime * rotateSpeed
             );
-            keyHole.rotation = key.rotation;
+            
 
         }
         
@@ -80,10 +81,9 @@ public class BIGDoorController : MonoBehaviour
                Time.deltaTime * rotateSpeed
            );
         }
-        if (key.position==targetPosition.position&&door1.rotation==initialDoorRotation)
-        {
-            audioSource.Play();
-        }
+        
+            
+        
 
     }
    
