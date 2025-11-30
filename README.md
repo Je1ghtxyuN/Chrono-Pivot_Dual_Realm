@@ -1,4 +1,55 @@
-# 晷枢双界
+# Chrono-Pivot Dual Realm 
+
+## Project Introduction
+Chrono-Pivot Dual Realm is a VR puzzle game developed by Southeast University's Virtuoso Nexus game team, specifically designed for PICO VR devices. The game blends Eastern mysticism with modern puzzle elements, delivering an immersive virtual reality experience.
+
+## System Requirements
+- **Hardware Requirements**: Only supports PICO series VR devices
+- **Operating System**: PICO OS latest version
+- **Storage Space**: At least 2GB available space
+
+## Installation Guide
+1. Download the latest game package from the GitHub repository
+2. Install the APK file via PICO developer mode or app store
+3. Ensure the device has sufficient battery or is connected to power
+4. Wear the PICO device and launch the game
+
+## Game Features
+- Unique dual-world puzzle mechanics
+- Integration of traditional Chinese astronomical elements
+- Immersive VR interaction experience
+- Carefully designed puzzles and scenes
+- Eastern aesthetic style environment design
+
+## Controls
+- **Left Controller**: Movement and basic interaction
+- **Right Controller**: Special operations and item usage
+- **Trigger Button**: Confirm/Pick up items
+- **Joystick**: Movement/View adjustment
+- **Menu Button**: Open game menu
+
+## Development Team
+Southeast University Virtuoso Nexus Game Team
+
+## Precautions
+- Recommended to play in a safe, open space
+- Avoid prolonged gameplay; take regular breaks
+- If experiencing motion sickness, stop playing immediately
+
+## Feedback & Support
+For any issues or suggestions, please submit feedback via GitHub Issues:
+https://github.com/Je1ghtxyuN/Chrono-Pivot_Dual_Realm/issues
+
+## Copyright
+© 2025 Southeast University Virtuoso Nexus Game Team. All rights reserved.
+
+---
+
+*Please ensure your PICO device is updated to the latest system version for optimal gaming experience*
+
+---
+
+# 晷枢双界 
 
 ## 项目简介
 《晷枢双界》是由东南大学Virtuoso Nexus游戏团队开发的一款VR解谜游戏，专为PICO VR设备设计。游戏融合了东方神秘主义与现代解谜元素，为玩家带来沉浸式的虚拟现实体验。
@@ -38,7 +89,7 @@
 
 ## 反馈与支持
 如有任何问题或建议，请通过GitHub Issues提交反馈：
-https://github.com/Je1ghtxyuN/SEU_VR_Game/issues
+https://github.com/Je1ghtxyuN/Chrono-Pivot_Dual_Realm/issues
 
 ## 版权声明
 © 2025 东南大学Virtuoso Nexus游戏团队 版权所有
